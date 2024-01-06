@@ -1,0 +1,27 @@
+2023-03-29 21:01:57.1669||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting ||||
+2023-03-29 21:01:59.9611||DEBUG|1|Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer|Using development certificate: CN=localhost (Thumbprint: 271FCE57A0031D4456FCBF86AC23FB6233DED546) ||||
+2023-03-29 21:02:00.0442||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 ||||
+2023-03-29 21:02:00.0526||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 ||||
+2023-03-29 21:02:00.0526||DEBUG|1|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly GreenHauseMonitor ||||
+2023-03-29 21:02:00.0771||INFO|1|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. ||||
+2023-03-29 21:02:00.0809||INFO|1|Microsoft.Hosting.Lifetime|Hosting environment: Development ||||
+2023-03-29 21:02:00.0809||INFO|1|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor ||||
+2023-03-29 21:02:00.0809||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting started ||||
+2023-03-29 21:02:00.1148||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMPGH09LARDN" received FIN. ||||
+2023-03-29 21:02:00.1148||DEBUG|8|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMPGH09LARDO" received FIN. ||||
+2023-03-29 21:02:00.1344||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDN" accepted. ||||
+2023-03-29 21:02:00.1344||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDN" started. ||||
+2023-03-29 21:02:00.1437||DEBUG|8|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDO" accepted. ||||
+2023-03-29 21:02:00.1437||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDO" started. ||||
+2023-03-29 21:02:00.1730||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)||||
+2023-03-29 21:02:00.1949||DEBUG|11|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Failed to authenticate HTTPS connection. System.IO.IOException:  Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveBlobAsync[TIOAdapter](TIOAdapter adapter)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](TIOAdapter adapter, Boolean receiveFirst, Byte[] reAuthenticationData, Boolean isApm)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)||||
+2023-03-29 21:02:00.2561||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDN" stopped. ||||
+2023-03-29 21:02:00.2561||DEBUG|11|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMPGH09LARDO" stopped. ||||
+2023-03-29 21:02:00.2561||DEBUG|11|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMPGH09LARDN" sending FIN because: "The Socket transport's send loop completed gracefully." ||||
+2023-03-29 21:02:00.2561||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMPGH09LARDO" sending FIN because: "The Socket transport's send loop completed gracefully." ||||

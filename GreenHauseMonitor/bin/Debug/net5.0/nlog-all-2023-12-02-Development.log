@@ -1,0 +1,209 @@
+2023-12-02 18:02:04.3739||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting ||||
+2023-12-02 18:02:06.6319||DEBUG|1|Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer|Using development certificate: CN=localhost (Thumbprint: 271FCE57A0031D4456FCBF86AC23FB6233DED546) ||||
+2023-12-02 18:02:06.7136||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 ||||
+2023-12-02 18:02:06.7136||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 ||||
+2023-12-02 18:02:06.7136||DEBUG|1|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly GreenHauseMonitor ||||
+2023-12-02 18:02:06.7136||DEBUG|1|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh ||||
+2023-12-02 18:02:06.7136||DEBUG|1|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net ||||
+2023-12-02 18:02:06.7136||INFO|1|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. ||||
+2023-12-02 18:02:06.7136||INFO|1|Microsoft.Hosting.Lifetime|Hosting environment: Development ||||
+2023-12-02 18:02:06.7136||INFO|1|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor ||||
+2023-12-02 18:02:06.7136||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting started ||||
+2023-12-02 18:02:06.8275||DEBUG|8|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMEQ" accepted. ||||
+2023-12-02 18:02:06.8308||DEBUG|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMEQ" started. ||||
+2023-12-02 18:02:06.8973||DEBUG|6|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMER" accepted. ||||
+2023-12-02 18:02:06.8973||DEBUG|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMER" started. ||||
+2023-12-02 18:02:09.4435||DEBUG|6|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" accepted. ||||
+2023-12-02 18:02:09.5232||DEBUG|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" started. ||||
+2023-12-02 18:02:09.6727||DEBUG|14|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Connection "0HMVJB1L3TMES" established using the following protocol: Tls12 ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending SETTINGS frame for stream ID 0 with length 18 and flags NONE ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0 ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received SETTINGS frame for stream ID 0 with length 24 and flags NONE ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending SETTINGS frame for stream ID 0 with length 0 and flags ACK ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received WINDOW_UPDATE frame for stream ID 0 with length 4 and flags 0x0 ||||
+2023-12-02 18:02:09.7065||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 1 with length 462 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:09.7895|00-cffcae788f02554eb403b0cfa100c3d8-478a3bb559199f48-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger - - |GET|https://localhost/swagger||
+2023-12-02 18:02:09.8018||TRACE|13|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received SETTINGS frame for stream ID 0 with length 0 and flags ACK ||||
+2023-12-02 18:02:10.1516|00-cffcae788f02554eb403b0cfa100c3d8-478a3bb559199f48-00|DEBUG|9|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|Wildcard detected, all requests with hosts will be allowed. |GET|https://localhost/swagger||
+2023-12-02 18:02:10.1516|00-cffcae788f02554eb403b0cfa100c3d8-478a3bb559199f48-00|TRACE|9|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger||
+2023-12-02 18:02:10.1735|00-cffcae788f02554eb403b0cfa100c3d8-478a3bb559199f48-00|TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 1 with length 69 and flags END_STREAM, END_HEADERS |GET|https://localhost/swagger||
+2023-12-02 18:02:10.1735|00-cffcae788f02554eb403b0cfa100c3d8-478a3bb559199f48-00|INFO|9|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger - - - 301 0 - 388.0638ms |GET|https://localhost/swagger||
+2023-12-02 18:02:10.2238||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 3 with length 36 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.2951|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|INFO|12|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - - |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.3005|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|TRACE|9|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.3612|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|DEBUG|9|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup is scheduled to include browser refresh script injection. |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.3612|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 3 with length 28 and flags END_HEADERS |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.3795||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 3 with length 3175 and flags NONE ||||
+2023-12-02 18:02:10.3810||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 3 with length 357 and flags NONE ||||
+2023-12-02 18:02:10.3810||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 3 with length 65 and flags NONE ||||
+2023-12-02 18:02:10.3810||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 3 with length 16 and flags NONE ||||
+2023-12-02 18:02:10.3810|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|DEBUG|9|Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware|Response markup was updated to include browser refresh script injection. |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.3810||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 3 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.3810|00-8fd1eb82d3f960458578f9528002f464-695fc56ffec5a449-00|INFO|9|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 86.7688ms |GET|https://localhost/swagger/index.html||
+2023-12-02 18:02:10.4061||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 5 with length 106 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.4061||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 7 with length 52 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.4061||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 9 with length 50 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.4188||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 11 with length 51 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.4188||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 13 with length 33 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:10.4188|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.4188|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|TRACE|14|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.4188|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|INFO|10|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.4188|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|INFO|4|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:10.4188|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|TRACE|4|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:10.4188|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|TRACE|10|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.4188|00-3d18e56ad434d44bbe1a32d6360fbcf1-d9ac2306454c0542-00|INFO|12|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - |GET|https://localhost/_framework/aspnetcore-browser-refresh.js||
+2023-12-02 18:02:10.4188|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|TRACE|14|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty. |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.4188|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|TRACE|4|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty. |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:10.4188|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|TRACE|10|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty. |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.4272|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 9 with length 93 and flags END_HEADERS |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.4272|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 5 with length 43 and flags END_HEADERS |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.4272||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.4272||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.4272||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.4272||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.4883|00-bf74feb67c433a41a94372ba9667d262-19afabd2a55a9645-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/_vs/browserLink - - |GET|https://localhost/_vs/browserLink||
+2023-12-02 18:02:10.5213|00-3d18e56ad434d44bbe1a32d6360fbcf1-d9ac2306454c0542-00|TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 11 with length 60 and flags END_HEADERS |GET|https://localhost/_framework/aspnetcore-browser-refresh.js||
+2023-12-02 18:02:10.5213||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 11 with length 12004 and flags NONE ||||
+2023-12-02 18:02:10.5801||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 11 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.5801|00-3d18e56ad434d44bbe1a32d6360fbcf1-d9ac2306454c0542-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 12004 application/javascript;+charset=utf-8 157.7751ms |GET|https://localhost/_framework/aspnetcore-browser-refresh.js||
+2023-12-02 18:02:10.5993||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.5993||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.5993||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.5993||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.6223||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 11861 and flags NONE ||||
+2023-12-02 18:02:10.6223|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|INFO|14|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A' |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.6223||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 5 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.6223|00-7de1582ef22d2f4e911de9ad82c77e58-c25ece2755bcf64f-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui.css - - - 200 142933 text/css 205.8301ms |GET|https://localhost/swagger/swagger-ui.css||
+2023-12-02 18:02:10.6223|00-bf74feb67c433a41a94372ba9667d262-19afabd2a55a9645-00|TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 13 with length 149 and flags END_HEADERS |GET|https://localhost/_vs/browserLink||
+2023-12-02 18:02:10.6223||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 9986 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6332||TRACE|9|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6699||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.6699||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.6699||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.6699||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.6921||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 10240 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 160 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 13 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.7109|00-bf74feb67c433a41a94372ba9667d262-19afabd2a55a9645-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 223.7834ms |GET|https://localhost/_vs/browserLink||
+2023-12-02 18:02:10.7109|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 7 with length 34 and flags END_HEADERS |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:10.7109||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7109||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7587||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7587||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7688||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.7688||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8178||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8178||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8178||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8178||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8491||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8491||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8491||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8491||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 508 and flags NONE ||||
+2023-12-02 18:02:10.8654|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|INFO|10|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A' |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 9 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.8654|00-03236dc05247764d8eefc6624582bf9f-449ccdfb5a8ee440-00|INFO|10|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-standalone-preset.js - - - 200 311804 application/javascript 444.1461ms |GET|https://localhost/swagger/swagger-ui-standalone-preset.js||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8654||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8888||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8888||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8888||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.8888||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9182||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9275||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|4|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9407||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9561||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 16384 and flags NONE ||||
+2023-12-02 18:02:10.9811||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 3302 and flags NONE ||||
+2023-12-02 18:02:10.9811|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|INFO|12|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A' |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:10.9811||TRACE|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 7 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:10.9811|00-7307141b4c88d049a0750338dfed8a27-d458cb7138026341-00|INFO|12|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/swagger-ui-bundle.js - - - 200 986342 application/javascript 559.6920ms |GET|https://localhost/swagger/swagger-ui-bundle.js||
+2023-12-02 18:02:11.0835||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 15 with length 66 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:11.0835|00-b4b3a0db47df78419c4ddc295459bf93-6f0d2d5b273a834a-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - |GET|https://localhost/swagger/v1/swagger.json||
+2023-12-02 18:02:11.0835|00-b4b3a0db47df78419c4ddc295459bf93-6f0d2d5b273a834a-00|TRACE|14|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/v1/swagger.json||
+2023-12-02 18:02:11.1334||TRACE|13|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" received HEADERS frame for stream ID 17 with length 88 and flags END_STREAM, END_HEADERS, PRIORITY ||||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|INFO|13|Microsoft.AspNetCore.Hosting.Diagnostics|Request starting HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|TRACE|13|Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware|All hosts are allowed. |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|TRACE|13|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Range header's value is empty. |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|TRACE|13|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 17 with length 41 and flags END_HEADERS |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.1334||TRACE|13|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 17 with length 628 and flags NONE ||||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|INFO|13|Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware|Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A' |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.1334||TRACE|13|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 17 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:11.1334|00-c05abe1d22fc33448bcb7bd7eb85b6a9-dbaa69b6a44edb41-00|INFO|13|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/favicon-32x32.png - - - 200 628 image/png 0.9161ms |GET|https://localhost/swagger/favicon-32x32.png||
+2023-12-02 18:02:11.2855|00-b4b3a0db47df78419c4ddc295459bf93-6f0d2d5b273a834a-00|TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending HEADERS frame for stream ID 15 with length 35 and flags END_HEADERS |GET|https://localhost/swagger/v1/swagger.json||
+2023-12-02 18:02:11.2855||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 15 with length 13936 and flags NONE ||||
+2023-12-02 18:02:11.2855||TRACE|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" sending DATA frame for stream ID 15 with length 0 and flags END_STREAM ||||
+2023-12-02 18:02:11.2855|00-b4b3a0db47df78419c4ddc295459bf93-6f0d2d5b273a834a-00|INFO|14|Microsoft.AspNetCore.Hosting.Diagnostics|Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 202.3528ms |GET|https://localhost/swagger/v1/swagger.json||
+2023-12-02 18:02:13.5899||DEBUG|13|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMVJB1L3TMES" received FIN. ||||
+2023-12-02 18:02:13.5899||DEBUG|13|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMVJB1L3TMES" sending FIN because: "The client closed the connection." ||||
+2023-12-02 18:02:13.5899||DEBUG|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" is closed. The last processed stream ID was 17. ||||
+2023-12-02 18:02:13.5990||DEBUG|14|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMES" stopped. ||||
+2023-12-02 18:02:16.8432||DEBUG|10|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Authentication of the HTTPS connection timed out. ||||
+2023-12-02 18:02:16.8432||DEBUG|10|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMEQ" stopped. ||||
+2023-12-02 18:02:16.8432||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMVJB1L3TMEQ" sending FIN because: "The Socket transport's send loop completed gracefully." ||||
+2023-12-02 18:02:16.9164||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware|Authentication of the HTTPS connection timed out. ||||
+2023-12-02 18:02:16.9164||DEBUG|12|Microsoft.AspNetCore.Server.Kestrel|Connection id "0HMVJB1L3TMER" stopped. ||||
+2023-12-02 18:02:16.9164||DEBUG|10|Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets|Connection id "0HMVJB1L3TMER" sending FIN because: "The Socket transport's send loop completed gracefully." ||||

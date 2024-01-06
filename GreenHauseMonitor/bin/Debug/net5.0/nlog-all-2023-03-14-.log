@@ -1,0 +1,13 @@
+2023-03-14 23:32:06.4248||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting starting ||||
+2023-03-14 23:32:07.5513||DEBUG|1|Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer|Using development certificate: CN=localhost (Thumbprint: 271FCE57A0031D4456FCBF86AC23FB6233DED546) ||||
+2023-03-14 23:32:07.5743||DEBUG|1|Microsoft.AspNetCore.Server.Kestrel|No listening endpoints were configured. Binding to http://localhost:5000 and https://localhost:5001 by default. ||||
+2023-03-14 23:32:07.5743||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: http://localhost:5000 ||||
+2023-03-14 23:32:07.5743||INFO|1|Microsoft.Hosting.Lifetime|Now listening on: https://localhost:5001 ||||
+2023-03-14 23:32:07.5743||DEBUG|1|Microsoft.AspNetCore.Hosting.Diagnostics|Loaded hosting startup assembly GreenHauseMonitor ||||
+2023-03-14 23:32:07.5743||INFO|1|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down. ||||
+2023-03-14 23:32:07.5743||INFO|1|Microsoft.Hosting.Lifetime|Hosting environment: Production ||||
+2023-03-14 23:32:07.5743||INFO|1|Microsoft.Hosting.Lifetime|Content root path: C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\bin\Debug\net5.0 ||||
+2023-03-14 23:32:07.5743||DEBUG|1|Microsoft.Extensions.Hosting.Internal.Host|Hosting started ||||
+2023-03-14 23:32:08.5259||INFO|2|Microsoft.Hosting.Lifetime|Application is shutting down... ||||
+2023-03-14 23:32:08.5259||DEBUG|5|Microsoft.Extensions.Hosting.Internal.Host|Hosting stopping ||||
+2023-03-14 23:32:08.5498||DEBUG|11|Microsoft.Extensions.Hosting.Internal.Host|Hosting stopped ||||
