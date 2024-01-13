@@ -331,3 +331,12 @@
 2024-01-13 15:15:17.5497 Info Configuration initialized.
 2024-01-13 15:15:17.5633 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.1.2.1561. Product version: 5.1.2+f57745d9fb1124b8629db879019db120a57698ab. GlobalAssemblyCache: False
 2024-01-13 15:15:17.5633 Info Validating config: TargetNames=allfile, exception, request-time, ConfigItems=102, FilePath=C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\bin\Debug\net6.0\NLog.config
+2024-01-13 16:38:14.1031 Info Message Template Auto Format enabled
+2024-01-13 16:38:14.1302 Info Loading assembly: NLog.Web.AspNetCore
+2024-01-13 16:38:14.2481 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-01-13 16:38:14.2481 Info Registered target NLog.Targets.FileTarget(Name=exception)
+2024-01-13 16:38:14.2481 Info Registered target NLog.Targets.FileTarget(Name=request-time)
+2024-01-13 16:38:14.2988 Info Validating config: TargetNames=allfile, exception, request-time, ConfigItems=102, FilePath=D:\Code\CMMS\GreenHauseMonitor\GreenHauseMonitor\bin\Debug\net6.0\NLog.config
+2024-01-13 16:38:14.3212 Info Configuration initialized.
+2024-01-13 16:38:14.3438 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.1.2.1561. Product version: 5.1.2+f57745d9fb1124b8629db879019db120a57698ab. GlobalAssemblyCache: False
+2024-01-13 16:38:14.3438 Info Validating config: TargetNames=allfile, exception, request-time, ConfigItems=102, FilePath=D:\Code\CMMS\GreenHauseMonitor\GreenHauseMonitor\bin\Debug\net6.0\NLog.config

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OyYbMBAPU0mHkPLWsfGlsGH2G9/Yt43lwZWDWo78r9c=",
+  "Hash": "Xrhr/TGx+n0iXM0u8wfpbiUQ6LdjyapzTXRbPbmZiJY=",
   "Source": "Cmms",
   "BasePath": "_content/Cmms",
   "Mode": "Default",
@@ -10,24 +10,22 @@
     {
       "Name": "Cmms\\wwwroot",
       "Source": "Cmms",
-      "ContentRoot": "C:\\Users\\Azzinoth\\source\\repos\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\",
+      "ContentRoot": "D:\\Code\\CMMS\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\",
       "BasePath": "_content/Cmms",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Azzinoth\\source\\repos\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\sample-file.txt",
+      "Identity": "D:\\Code\\CMMS\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\sample-file.txt",
       "SourceId": "Cmms",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Azzinoth\\source\\repos\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\",
+      "ContentRoot": "D:\\Code\\CMMS\\GreenHauseMonitor\\GreenHauseMonitor\\wwwroot\\",
       "BasePath": "_content/Cmms",
       "RelativePath": "sample-file.txt",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",

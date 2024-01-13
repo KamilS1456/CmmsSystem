@@ -146,3 +146,5 @@ app.Run();
 //                .UseNLog();
 //    }
 //}
+
+//Lubie placki
