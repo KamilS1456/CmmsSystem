@@ -21,7 +21,7 @@ namespace Cmms.Authorization
                 context.Succeed(requirement);
             }
             var userId = context.User.FindFirst(f => f.Type == ClaimTypes.NameIdentifier).Value;
-            if (restaurant.CreatedById == int.Parse(userId)) { 
+            if (restaurant.CreatedByUserId == int.Parse(userId)) { 
                 context.Succeed(requirement);
             }
             return Task.CompletedTask;

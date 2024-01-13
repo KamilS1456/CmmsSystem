@@ -4,6 +4,7 @@ using Cmms.EntitieDbCOntext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenHauseMonitor.Migrations
 {
     [DbContext(typeof(CmmsDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109152004_SettingBoolAndInt")]
+    partial class SettingBoolAndInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,7 +334,7 @@ namespace GreenHauseMonitor.Migrations
                         .HasForeignKey("RoleId");
 
                     b.HasOne("Cmms.Entities.Settings.Setting", "Setting")
-                        .WithMany("SettingValueBoolList")
+                        .WithMany()
                         .HasForeignKey("SettingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -355,7 +357,7 @@ namespace GreenHauseMonitor.Migrations
                         .HasForeignKey("RoleId");
 
                     b.HasOne("Cmms.Entities.Settings.Setting", "Setting")
-                        .WithMany("SettingValueIntList")
+                        .WithMany()
                         .HasForeignKey("SettingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -390,13 +392,6 @@ namespace GreenHauseMonitor.Migrations
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>
                 {
                     b.Navigation("Dishes");
-                });
-
-            modelBuilder.Entity("Cmms.Entities.Settings.Setting", b =>
-                {
-                    b.Navigation("SettingValueBoolList");
-
-                    b.Navigation("SettingValueIntList");
                 });
 #pragma warning restore 612, 618
         }

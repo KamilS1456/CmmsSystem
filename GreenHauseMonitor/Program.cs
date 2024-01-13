@@ -27,6 +27,7 @@ using System.Reflection;
 using Cmms.EntitieDbCOntext;
 using Cmms.Entities;
 using Cmms.Middleware;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder();
@@ -60,10 +61,12 @@ builder.Services.AddAuthentication(option =>
 });
 builder.Services.AddAuthorization(options =>
 {
+    //options.AddPolicy("SettingAllowedOperation", builder => builder.AddRequirements(new SettingAllowedOperation(string.)));
     options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "Polish", "string"));
     options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
 });
 
+builder.Services.AddScoped<IAuthorizationHandler, SettingAllowedOperationHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, ResourcesOperationRequirementHandler>();
 builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
 builder.Services.AddControllers();
@@ -81,6 +84,7 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IDishService, DishService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidators>();

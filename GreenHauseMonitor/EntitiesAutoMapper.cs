@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Cmms.Entities;
+using Cmms.Entities.Settings;
 using Cmms.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,10 @@ namespace Cmms
             CreateMap<CreateRestaurantDto, Restaurant>()
                 .ForMember(m => m.Address, c => c.MapFrom(dto => new Address()
                 { City = dto.City, PostalCode = dto.PostalCode, Street = dto.Street }));
+
+            CreateMap<SettingValueBool, SettingValueBoolDto>().ReverseMap();
+            CreateMap<SettingValueIntDto, SettingValueInt>().ReverseMap();
+            CreateMap<Setting, SettingDto>().ReverseMap();
 
         }
 

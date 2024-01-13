@@ -1,5 +1,6 @@
 ﻿using Cmms.EntitieDbCOntext;
 using Cmms.Entities;
+using Cmms.Entities.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,29 @@ namespace Cmms
                 {
                     var roleList = GetRoleList();
                     _dbContext.Roles.AddRange(roleList);
+                    _dbContext.SaveChanges();
+                }
+
+                if (!_dbContext.Settings.Any())
+                {
+                    var settingList = GetSettingList();
+                    _dbContext.Settings.AddRange(settingList);             
+
+                    foreach (var setting in settingList)
+                    {
+                        if (setting.ValueType == SettingDictionary.SettingType.Boolean && _dbContext.SettingValueBools.Where(w => w.SettingId == setting.Id).Count() == 0) {
+                            var settingValueBool = new SettingValueBool()
+                            {
+                                RoleId = _dbContext.Roles.First().Id,
+                                SettingId = setting.Id,
+                                UserId = _dbContext.Users.First().Id,
+                                Value = false,
+                            };
+
+
+                            _dbContext.SettingValueBools.Add(settingValueBool);
+                        }
+                    }
                     _dbContext.SaveChanges();
                 }
             }
@@ -109,6 +133,20 @@ namespace Cmms
             };
 
             return roles;
+        }
+
+        private IEnumerable<Setting> GetSettingList()
+        {
+            var settings = new List<Setting>(){
+              new Setting(){
+                Name = "Testowe ustawienie pozwolenia pobrania restauracji po id",
+                CodeName = SettingCodeName.AllowGetingRestaurantByID,
+                Description = "Testowe ustawienie pozwolenia pobrania restauracji po id",
+                ValueType = SettingDictionary.SettingType.Boolean
+              }
+            };
+
+            return settings;
         }
     }
 }

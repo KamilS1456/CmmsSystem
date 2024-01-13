@@ -77,3 +77,4 @@ C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\obj\Debug\net
 C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\obj\Debug\net6.0\Cmms.pdb
 C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\obj\Debug\net6.0\Cmms.genruntimeconfig.cache
 C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\obj\Debug\net6.0\ref\Cmms.dll
+C:\Users\Azzinoth\source\repos\GreenHauseMonitor\GreenHauseMonitor\obj\Debug\net6.0\Cmms.sourcelink.json

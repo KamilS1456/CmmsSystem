@@ -4,6 +4,7 @@ using Cmms.EntitieDbCOntext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenHauseMonitor.Migrations
 {
     [DbContext(typeof(CmmsDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240108211316_AddEntityBaseAndSetting")]
+    partial class AddEntityBaseAndSetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +163,7 @@ namespace GreenHauseMonitor.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Settings.Setting", b =>
+            modelBuilder.Entity("Cmms.Entities.Setting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -169,24 +171,18 @@ namespace GreenHauseMonitor.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("CodeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ValueType")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Settings.SettingValueBool", b =>
+            modelBuilder.Entity("Cmms.Entities.SettingToRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,17 +190,11 @@ namespace GreenHauseMonitor.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("RoleId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int>("SettingId")
                         .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Value")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -212,12 +202,10 @@ namespace GreenHauseMonitor.Migrations
 
                     b.HasIndex("SettingId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SettingValueBools");
+                    b.ToTable("SettingToRoles");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Settings.SettingValueInt", b =>
+            modelBuilder.Entity("Cmms.Entities.SettingToUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,27 +213,19 @@ namespace GreenHauseMonitor.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SettingId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Value")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.HasIndex("SettingId");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SettingValueInts");
+                    b.ToTable("SettingToUsers");
                 });
 
             modelBuilder.Entity("Cmms.Entities.User", b =>
@@ -325,50 +305,42 @@ namespace GreenHauseMonitor.Migrations
                     b.Navigation("CreatedBy");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Settings.SettingValueBool", b =>
+            modelBuilder.Entity("Cmms.Entities.SettingToRole", b =>
                 {
                     b.HasOne("Cmms.Entities.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Cmms.Entities.Settings.Setting", "Setting")
-                        .WithMany("SettingValueBoolList")
+                    b.HasOne("Cmms.Entities.Setting", "Setting")
+                        .WithMany()
                         .HasForeignKey("SettingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cmms.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Role");
 
                     b.Navigation("Setting");
-
-                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Settings.SettingValueInt", b =>
+            modelBuilder.Entity("Cmms.Entities.SettingToUser", b =>
                 {
-                    b.HasOne("Cmms.Entities.Role", "Role")
+                    b.HasOne("Cmms.Entities.Setting", "Setting")
                         .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.HasOne("Cmms.Entities.Settings.Setting", "Setting")
-                        .WithMany("SettingValueIntList")
                         .HasForeignKey("SettingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cmms.Entities.User", "User")
+                    b.HasOne("Cmms.Entities.User", "Role")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
                     b.Navigation("Setting");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cmms.Entities.User", b =>
@@ -390,13 +362,6 @@ namespace GreenHauseMonitor.Migrations
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>
                 {
                     b.Navigation("Dishes");
-                });
-
-            modelBuilder.Entity("Cmms.Entities.Settings.Setting", b =>
-                {
-                    b.Navigation("SettingValueBoolList");
-
-                    b.Navigation("SettingValueIntList");
                 });
 #pragma warning restore 612, 618
         }

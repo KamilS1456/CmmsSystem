@@ -34,7 +34,7 @@ namespace Cmms.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Policy = "AtLeast18")]
+        //[Authorize(Policy = "AtLeast18")]
         public ActionResult<RestaurantDto> Get([FromRoute] int id)
         {
             var restaurant = _service.GetById(id);

@@ -1,4 +1,5 @@
 ﻿using Cmms.Entities;
+using Cmms.Entities.Settings;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Cmms.EntitieDbCOntext
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<SettingValueBool> SettingValueBools { get; set; }
+        public DbSet<SettingValueInt> SettingValueInts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +49,8 @@ namespace Cmms.EntitieDbCOntext
             modelBuilder.Entity<Role>()
               .Property(a => a.Name)
               .IsRequired();
+
+            //modelBuilder.Entity<SettingToRole>();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

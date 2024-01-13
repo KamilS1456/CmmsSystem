@@ -2,6 +2,7 @@
 using Cmms.Authorization;
 using Cmms.EntitieDbCOntext;
 using Cmms.Entities;
+using Cmms.Entities.Settings;
 using Cmms.Excepction;
 using Cmms.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -37,7 +38,7 @@ namespace Cmms.Services
         public int Create(CreateRestaurantDto restaurantDto)
         {
             var restaurant = _mapper.Map<Restaurant>(restaurantDto);
-            restaurant.CreatedById = _userContextService.GetUserId;
+            restaurant.CreatedByUserId = _userContextService.GetUserId;
             _dbContext.Restaurants.Add(restaurant);
             _dbContext.SaveChanges();
             return restaurant.Id;
@@ -79,6 +80,13 @@ namespace Cmms.Services
                 .Include(d => d.Dishes)
                 .Include(a => a.Address)
                 .FirstOrDefault(f => f.Id == id);
+
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, restaurant, new SettingAllowedOperation(SettingCodeName.AllowGetingRestaurantByID)).Result;
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException();
+            }
+
             if (restaurant is null)
             {
                 throw new NotFoundException("Restaurant not found");
