@@ -4,6 +4,7 @@ using Cmms.EntitieDbCOntext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenHauseMonitor.Migrations
 {
     [DbContext(typeof(CmmsDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121205907_addEntityQuestOccurenceEquipmentAndConnectionBetweenThemREviewed")]
+    partial class addEntityQuestOccurenceEquipmentAndConnectionBetweenThemREviewed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,12 +113,17 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuestId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SN")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EquipmentId");
+
+                    b.HasIndex("QuestId");
 
                     b.ToTable("Equipments");
                 });
@@ -268,7 +275,10 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<int>("QuestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsertId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -492,10 +502,15 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuestId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestId");
 
                     b.HasIndex("RoleId");
 
@@ -518,6 +533,10 @@ namespace GreenHauseMonitor.Migrations
                     b.HasOne("Cmms.Entities.Equipment", null)
                         .WithMany("InnerEquipment")
                         .HasForeignKey("EquipmentId");
+
+                    b.HasOne("Cmms.Entities.Quest", null)
+                        .WithMany("TargetedEquipments")
+                        .HasForeignKey("QuestId");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Occurrence", b =>
@@ -548,7 +567,7 @@ namespace GreenHauseMonitor.Migrations
                         .IsRequired();
 
                     b.HasOne("Cmms.Entities.Quest", "Quest")
-                        .WithMany("QuestToEquipmentList")
+                        .WithMany()
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -561,16 +580,14 @@ namespace GreenHauseMonitor.Migrations
             modelBuilder.Entity("Cmms.Entities.QuestToUser", b =>
                 {
                     b.HasOne("Cmms.Entities.Quest", "Quest")
-                        .WithMany("QuestToUserList")
+                        .WithMany()
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Cmms.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Quest");
 
@@ -642,6 +659,10 @@ namespace GreenHauseMonitor.Migrations
 
             modelBuilder.Entity("Cmms.Entities.User", b =>
                 {
+                    b.HasOne("Cmms.Entities.Quest", null)
+                        .WithMany("AssignedUsers")
+                        .HasForeignKey("QuestId");
+
                     b.HasOne("Cmms.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -663,9 +684,9 @@ namespace GreenHauseMonitor.Migrations
 
             modelBuilder.Entity("Cmms.Entities.Quest", b =>
                 {
-                    b.Navigation("QuestToEquipmentList");
+                    b.Navigation("AssignedUsers");
 
-                    b.Navigation("QuestToUserList");
+                    b.Navigation("TargetedEquipments");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>

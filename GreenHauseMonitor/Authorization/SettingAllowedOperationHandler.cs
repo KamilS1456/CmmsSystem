@@ -57,7 +57,7 @@ namespace Cmms.Authorization
                                 var settinValueRole = _dbContext.SettingValueBools.FirstOrDefault(f => f.RoleId == user.RoleId);
                                 if (settinValueRole != null)
                                 {
-                                    settingValue = false;//settinValueRole.Value;
+                                    settingValue = settinValueRole.Value;
                                 }
                             }
                         }

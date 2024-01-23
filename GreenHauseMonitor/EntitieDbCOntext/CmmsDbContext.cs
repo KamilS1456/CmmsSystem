@@ -19,6 +19,13 @@ namespace Cmms.EntitieDbCOntext
         public DbSet<Setting> Settings { get; set; }
         public DbSet<SettingValueBool> SettingValueBools { get; set; }
         public DbSet<SettingValueInt> SettingValueInts { get; set; }
+        public DbSet<Quest> Quests { get; set; }
+        public DbSet<QuestToEquipment> QuestToEquipments { get; set; }
+        public DbSet<QuestToUser> QuestToUsers { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Occurrence> Occurrences { get; set; }
+        public DbSet<OccurrenceType> OccurrenceTypes { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +49,10 @@ namespace Cmms.EntitieDbCOntext
                .IsRequired()
                .HasMaxLength(25);
 
+            modelBuilder.Entity<Setting>()
+             .Property(a => a.Name)
+             .IsRequired();
+
             modelBuilder.Entity<User>()
              .Property(a => a.Email)
              .IsRequired();
@@ -50,6 +61,14 @@ namespace Cmms.EntitieDbCOntext
               .Property(a => a.Name)
               .IsRequired();
 
+            modelBuilder.Entity<Quest>()
+             .Property(a => a.Name)
+             .IsRequired();
+
+            //modelBuilder.Entity<QuestToEquipment>();
+
+            modelBuilder.Entity<QuestToUser>();
+            
             //modelBuilder.Entity<SettingToRole>();
         }
 

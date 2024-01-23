@@ -30,6 +30,8 @@ namespace Cmms
             CreateMap<SettingValueIntDto, SettingValueInt>().ReverseMap();
             CreateMap<Setting, SettingDto>().ReverseMap();
 
+            CreateMap<Quest, QuestDto>().ReverseMap();
+
         }
 
     }
