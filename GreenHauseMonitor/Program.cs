@@ -96,7 +96,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(optons =>
 {
     optons.AddPolicy("FrontEndClient", policybuilder =>
-        policybuilder.AllowAnyMethod().AllowAnyHeader().WithOrigins(builder.Configuration["AllowedOrgins"])
+        policybuilder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()//WithOrigins(builder.Configuration["AllowedOrgins"], builder.Configuration["AllowedOrginsWeb"])
     );
 });
 
