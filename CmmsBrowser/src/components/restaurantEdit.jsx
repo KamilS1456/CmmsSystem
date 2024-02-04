@@ -1,10 +1,10 @@
-import { Button } from "antd"
+import { Button, Card } from "antd"
 import React, { useState, useEffect } from 'react';
 
 const restaurantEdit = () => {
     const getQuesturl = 'https://localhost:5001/api/quest/4'
     const [loadings, setLoadings] = useState([]);
-    const [photos, setPhotos] = useState([]);
+    const [photos, setPhotos] = useState({"name":"1","description":"asd","priority":"1"});
 
     const fetchQuestData = async (index) => {
         enterLoading(index)
@@ -13,7 +13,7 @@ const restaurantEdit = () => {
          .then((response) => {
             console.log(response)
             console.log(2)
-            return response.json()            
+            return response.json()
         })
          .then((data) => {
             console.log(3)
@@ -50,13 +50,21 @@ const restaurantEdit = () => {
 
     return (
         <div>
-            <Button type="primary" 
+            <Button type="primary"
             loading = {loadings[1]}
             onClick= {() => fetchQuestData(1)}
             >
                 Loading
             </Button>
+            <Card
+                title="Quest Test"
+                bordered={true}
+            >
+                <p>{photos.name}</p>
+                <p>{photos.description}</p>
+                <p>{photos.priority}</p>
+            </Card>
         </div>
-    )   
+    )
 }
 export default restaurantEdit
