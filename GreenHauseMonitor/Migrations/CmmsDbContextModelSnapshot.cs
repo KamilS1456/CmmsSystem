@@ -4,18 +4,16 @@ using Cmms.EntitieDbCOntext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GreenHauseMonitor.Migrations
+namespace Cmms.Migrations
 {
     [DbContext(typeof(CmmsDbContext))]
-    [Migration("20240113132459_settingDtoAdd")]
-    partial class settingDtoAdd
+    partial class CmmsDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,6 +74,220 @@ namespace GreenHauseMonitor.Migrations
                     b.HasIndex("RestaurantId");
 
                     b.ToTable("Dishes");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.Equipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Condition")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LastModifyByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifyDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastServiceDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.EquipmentToEquipment", b =>
+                {
+                    b.Property<int>("InnerEquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrimalEquipmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InnerEquipmentId", "PrimalEquipmentId");
+
+                    b.HasIndex("PrimalEquipmentId");
+
+                    b.ToTable("EquipmentToEquipments");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.Occurrence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastModifyByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifyDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OccurrenceDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OccurrenceTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.HasIndex("OccurrenceTypeId");
+
+                    b.ToTable("Occurrences");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.OccurrenceType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DefaultPriority")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LastModifyByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifyDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OccurrenceTypes");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.Quest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("CreatedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeadLineDataTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LastModifyByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifyDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quests");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.QuestToEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.HasIndex("QuestId");
+
+                    b.ToTable("QuestToEquipments");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.QuestToUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("QuestId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("QuestToUsers");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>
@@ -178,6 +390,7 @@ namespace GreenHauseMonitor.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ValueType")
@@ -310,6 +523,82 @@ namespace GreenHauseMonitor.Migrations
                     b.Navigation("Restaurant");
                 });
 
+            modelBuilder.Entity("Cmms.Entities.EquipmentToEquipment", b =>
+                {
+                    b.HasOne("Cmms.Entities.Equipment", "InnerEquipment")
+                        .WithMany()
+                        .HasForeignKey("InnerEquipmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cmms.Entities.Equipment", "PrimalEquipment")
+                        .WithMany()
+                        .HasForeignKey("PrimalEquipmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("InnerEquipment");
+
+                    b.Navigation("PrimalEquipment");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.Occurrence", b =>
+                {
+                    b.HasOne("Cmms.Entities.Equipment", "Equipment")
+                        .WithMany()
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cmms.Entities.OccurrenceType", "OccurrenceType")
+                        .WithMany()
+                        .HasForeignKey("OccurrenceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipment");
+
+                    b.Navigation("OccurrenceType");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.QuestToEquipment", b =>
+                {
+                    b.HasOne("Cmms.Entities.Equipment", "Equipment")
+                        .WithMany()
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cmms.Entities.Quest", "Quest")
+                        .WithMany("QuestToEquipmentList")
+                        .HasForeignKey("QuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipment");
+
+                    b.Navigation("Quest");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.QuestToUser", b =>
+                {
+                    b.HasOne("Cmms.Entities.Quest", "Quest")
+                        .WithMany("QuestToUserList")
+                        .HasForeignKey("QuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cmms.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quest");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>
                 {
                     b.HasOne("Cmms.Entities.Address", "Address")
@@ -387,6 +676,13 @@ namespace GreenHauseMonitor.Migrations
             modelBuilder.Entity("Cmms.Entities.Address", b =>
                 {
                     b.Navigation("Restaurant");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.Quest", b =>
+                {
+                    b.Navigation("QuestToEquipmentList");
+
+                    b.Navigation("QuestToUserList");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>

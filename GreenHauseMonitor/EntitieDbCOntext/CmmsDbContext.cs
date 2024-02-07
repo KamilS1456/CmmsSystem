@@ -25,6 +25,7 @@ namespace Cmms.EntitieDbCOntext
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Occurrence> Occurrences { get; set; }
         public DbSet<OccurrenceType> OccurrenceTypes { get; set; }
+        public DbSet<EquipmentToEquipment> EquipmentToEquipments { get; set; }
 
 
 
@@ -65,11 +66,27 @@ namespace Cmms.EntitieDbCOntext
              .Property(a => a.Name)
              .IsRequired();
 
-            //modelBuilder.Entity<QuestToEquipment>();
 
-            modelBuilder.Entity<QuestToUser>();
-            
-            //modelBuilder.Entity<SettingToRole>();
+            modelBuilder.Entity<Equipment>()
+                .HasMany(e => e.PrimalEquipmentList)
+                .WithMany(e => e.InnerEquipmentList)
+                .UsingEntity<EquipmentToEquipment>(
+                    right => right
+                        .HasOne(joinEntity => joinEntity.PrimalEquipment)
+                        .WithMany().OnDelete(DeleteBehavior.NoAction),
+                    left => left
+                        .HasOne(joinEntity => joinEntity.InnerEquipment)
+                        .WithMany().OnDelete(DeleteBehavior.NoAction));
+        
+
+        //modelBuilder.Entity<Equipment>()
+        //         .HasMany(x => x.EquipmentList)
+        //         .WithMany(x => x.EquipmentList)
+        //         .UsingEntity<EquipmentToEquipment>(
+        //            e => e.HasOne<Equipment>().WithMany().HasForeignKey(e => e.PrimalEquipmentId),
+        //            e => e.HasOne<Equipment>().WithMany().HasForeignKey(e => e.InnerEquipmentId)
+        //        );
+                 //.OnDelete(DeleteBehavior.SetNull);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

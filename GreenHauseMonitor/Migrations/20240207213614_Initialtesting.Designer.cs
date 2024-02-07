@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GreenHauseMonitor.Migrations
+namespace Cmms.Migrations
 {
     [DbContext(typeof(CmmsDbContext))]
-    [Migration("20240122185651_addquesttouser1")]
-    partial class addquesttouser1
+    [Migration("20240207213614_Initialtesting")]
+    partial class Initialtesting
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -95,9 +95,6 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("EquipmentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("LastModifyByUserId")
                         .HasColumnType("int");
 
@@ -113,19 +110,27 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("QuestId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SN")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EquipmentId");
-
-                    b.HasIndex("QuestId");
-
                     b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("Cmms.Entities.EquipmentToEquipment", b =>
+                {
+                    b.Property<int>("InnerEquipmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrimalEquipmentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("InnerEquipmentId", "PrimalEquipmentId");
+
+                    b.HasIndex("PrimalEquipmentId");
+
+                    b.ToTable("EquipmentToEquipment");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Occurrence", b =>
@@ -499,15 +504,10 @@ namespace GreenHauseMonitor.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("QuestId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("QuestId");
 
                     b.HasIndex("RoleId");
 
@@ -525,15 +525,23 @@ namespace GreenHauseMonitor.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Equipment", b =>
+            modelBuilder.Entity("Cmms.Entities.EquipmentToEquipment", b =>
                 {
-                    b.HasOne("Cmms.Entities.Equipment", null)
-                        .WithMany("InnerEquipment")
-                        .HasForeignKey("EquipmentId");
+                    b.HasOne("Cmms.Entities.Equipment", "InnerEquipment")
+                        .WithMany()
+                        .HasForeignKey("InnerEquipmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
-                    b.HasOne("Cmms.Entities.Quest", null)
-                        .WithMany("TargetedEquipments")
-                        .HasForeignKey("QuestId");
+                    b.HasOne("Cmms.Entities.Equipment", "PrimalEquipment")
+                        .WithMany()
+                        .HasForeignKey("PrimalEquipmentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("InnerEquipment");
+
+                    b.Navigation("PrimalEquipment");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Occurrence", b =>
@@ -564,7 +572,7 @@ namespace GreenHauseMonitor.Migrations
                         .IsRequired();
 
                     b.HasOne("Cmms.Entities.Quest", "Quest")
-                        .WithMany()
+                        .WithMany("QuestToEquipmentList")
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -577,7 +585,7 @@ namespace GreenHauseMonitor.Migrations
             modelBuilder.Entity("Cmms.Entities.QuestToUser", b =>
                 {
                     b.HasOne("Cmms.Entities.Quest", "Quest")
-                        .WithMany()
+                        .WithMany("QuestToUserList")
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -658,10 +666,6 @@ namespace GreenHauseMonitor.Migrations
 
             modelBuilder.Entity("Cmms.Entities.User", b =>
                 {
-                    b.HasOne("Cmms.Entities.Quest", null)
-                        .WithMany("AssignedUsers")
-                        .HasForeignKey("QuestId");
-
                     b.HasOne("Cmms.Entities.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
@@ -676,16 +680,11 @@ namespace GreenHauseMonitor.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("Cmms.Entities.Equipment", b =>
-                {
-                    b.Navigation("InnerEquipment");
-                });
-
             modelBuilder.Entity("Cmms.Entities.Quest", b =>
                 {
-                    b.Navigation("AssignedUsers");
+                    b.Navigation("QuestToEquipmentList");
 
-                    b.Navigation("TargetedEquipments");
+                    b.Navigation("QuestToUserList");
                 });
 
             modelBuilder.Entity("Cmms.Entities.Restaurant", b =>

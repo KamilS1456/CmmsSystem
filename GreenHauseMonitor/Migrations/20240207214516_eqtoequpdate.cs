@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace GreenHauseMonitor.Migrations
+namespace Cmms.Migrations
 {
-    public partial class addquesttouser1 : Migration
+    public partial class eqtoequpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

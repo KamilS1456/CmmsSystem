@@ -11,7 +11,9 @@ namespace Cmms.Entities
         public Dictionary.Dictionary.EquipmentCondition Condition { get; set; }
         public DateTime LastServiceDateTime { get; set; }
 
-        public virtual List<Equipment> InnerEquipment { get; set; }
+        public virtual List<Equipment> PrimalEquipmentList { get; set; }
+        public virtual List<Equipment> InnerEquipmentList { get; set; }
+        //public virtual List<EquipmentToEquipment> EquipmentToEquipmentList { get; set; }
 
 
     }
