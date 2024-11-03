@@ -82,10 +82,10 @@ namespace Cmms.Services
                 .FirstOrDefault(f => f.Id == id);
 
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, restaurant, new SettingAllowedOperation(SettingCodeName.AllowGetingRestaurantByID)).Result;
-            if (!authorizationResult.Succeeded)
-            {
-                throw new ForbidException();
-            }
+            //if (!authorizationResult.Succeeded)
+            //{
+            //    throw new ForbidException();
+            //}
 
             if (restaurant is null)
             {

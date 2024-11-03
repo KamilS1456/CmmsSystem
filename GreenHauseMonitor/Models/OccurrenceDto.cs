@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Cmms.Entities;
+using System.Collections.Generic;
+using System;
+using Cmms.Dictionary;
 using static Cmms.Dictionary.Dictionary;
 
-namespace Cmms.Entities
+namespace Cmms.Models
 {
-    public class Occurrence : EntityBase
+    public class OccurrenceDto
     {
-        public DateTime OccurrenceDateTime { get; set; }
+        public int Id { get; set; }
+        public DateTime OccurrenceDateTime { get; set; } = DateTime.Now;
         public string Description { get; set; }
         public int EquipmentId { get; set; }
         public int Priority { get; set; }
         public int OccurrenceTypeId { get; set; }
         public OccuranceState OccuranceState { get; set; } = OccuranceState.New;
 
-        public virtual Equipment Equipment { get; set; }
-        public virtual OccurrenceType OccurrenceType { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Cmms.Entities;
 using Cmms.Entities.Settings;
 using Cmms.Models;
+using Microsoft.AspNetCore.Routing.Constraints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,14 @@ namespace Cmms
             CreateMap<Setting, SettingDto>().ReverseMap();
 
             CreateMap<Quest, QuestDto>().ReverseMap();
+
+            CreateMap<EquipmentSet, EquipmentSetDto>();//.ForMember(s => s.EquipmentSetToEquipments, c => c.MapFrom(m => m.EquipmentSetToEquipments));
+            CreateMap<EquipmentSetToEquipment, EquipmentSetToEquipmentDto>();
+            CreateMap<Equipment, EquipmentDto>();
+            CreateMap<Equipment, EquipmentDto>().ReverseMap();
+            CreateMap<EquipmentToEquipment, EquipmentToEquipmentDto>();
+
+            CreateMap<Occurrence, OccurrenceDto>();
 
         }
 

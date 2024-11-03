@@ -12,5 +12,7 @@ namespace Cmms.Services
 
         public ClaimsPrincipal User { get { return _httpContextAccessor.HttpContext?.User; } }
         public int? GetUserId => User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+        public int? GetRoleId => User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.Role).Value);
     }
 }

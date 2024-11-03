@@ -28,6 +28,9 @@ using Cmms.EntitieDbCOntext;
 using Cmms.Entities;
 using Cmms.Middleware;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.ComponentModel.DataAnnotations;
+using Cmms.Controllers;
 
 
 var builder = WebApplication.CreateBuilder();
@@ -38,24 +41,39 @@ builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 builder.Host.UseNLog();
 
 //configure services
+//builder.Services.AddIdentity<User, Role>(options =>
+//{
+//    options.Password.RequiredLength = 3;
+//    //options.Password.RequireNonAlphanumeric = true;
+//    //options.Password.RequireDigit = true;
+//    //options.Password.RequireLowercase = true;
+//    //options.Password.RequireUppercase = true;
+//});//.add. AddEntityFrameworkStores<AuthCmmsDbContext>()
+////.AddDefaultTopkenProviders();
 
 var authenticationSetting = new AuthenticationSettings();
 builder.Configuration.GetSection("Authentication").Bind(authenticationSetting);
 builder.Services.AddSingleton(authenticationSetting);
 builder.Services.AddAuthentication(option =>
 {
-    option.DefaultAuthenticateScheme = "Bearer";
-    option.DefaultScheme = "Bearer";
-    option.DefaultChallengeScheme = "Bearer";
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;// "Bearer";
+    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;// "Bearer";
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;//"Bearer";
 }).AddJwtBearer(cfg =>
 {
     cfg.RequireHttpsMetadata = false;
     cfg.SaveToken = true;
     cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
     {
+        ValidateActor = false,
         ValidIssuer = authenticationSetting.JwtIssuer,
         ValidAudience = authenticationSetting.JwtIssuer,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSetting.JwtKey)),
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        RequireExpirationTime = true
     };
 
 });
@@ -65,10 +83,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "Polish", "string"));
     options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
 });
-
-builder.Services.AddScoped<IAuthorizationHandler, SettingAllowedOperationHandler>();
-builder.Services.AddScoped<IAuthorizationHandler, ResourcesOperationRequirementHandler>();
-builder.Services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+AddAuthorizationHandlers(builder.Services);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -82,10 +97,12 @@ builder.Services.AddDbContext<CmmsDbContext>();
 builder.Services.AddScoped<CmmSSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-builder.Services.AddScoped<IDishService, DishService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IQuestService, QuestService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();
+builder.Services.AddScoped<IOccurrenceService, OccurrenceService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidators>();
@@ -96,7 +113,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(optons =>
 {
     optons.AddPolicy("FrontEndClient", policybuilder =>
-        policybuilder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()//WithOrigins(builder.Configuration["AllowedOrgins"], builder.Configuration["AllowedOrginsWeb"])
+        policybuilder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()//WithOrigins(builder.Configuration["AllowedOrgins"], builder.Configuration["AllowedOrginsWeb"])//todoo
     );
 });
 
@@ -120,6 +137,7 @@ app.UseAuthentication();
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
 app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
@@ -127,6 +145,13 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
+
+void AddAuthorizationHandlers(IServiceCollection services) 
+{
+    services.AddScoped<IAuthorizationHandler, SettingAllowedOperationHandler>();
+    services.AddScoped<IAuthorizationHandler, ResourcesOperationRequirementHandler>();
+    services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
+}
 
 //namespace GreenHauseMonitor
 //{

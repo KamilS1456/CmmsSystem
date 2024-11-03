@@ -1,4 +1,5 @@
 ﻿using Cmms.Models;
+using Cmms.Models.Respones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Cmms.Services
     public interface IAccountService
     {
         public void RegisterUser(RegisterUserDto dto);
-        public string GenerateJwt(LoginDto loginDto);
+        public LoginRespone Login(LoginDto loginDto);
+        public LoginRespone RefreshToken(RefreshTokenModel refreshTokenModel);
+        public void Delete(int id);
     }
 }

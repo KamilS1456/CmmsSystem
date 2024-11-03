@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Cmms.Entities
+namespace Cmms.Models
 {
-    public class Equipment : EntityBase
+    public class UpdateEquipmentDto
     {
         public string Name { get; set; }
         public string Model { get; set; }
@@ -11,7 +14,7 @@ namespace Cmms.Entities
         public Dictionary.Dictionary.EquipmentCondition Condition { get; set; }
         public DateTime LastServiceDateTime { get; set; }
 
-        public virtual List<Equipment> PrimalEquipmentList { get; set; }
-        public virtual List<Equipment> InnerEquipmentList { get; set; }
+        public List<int> PrimalEquipmentIdList { get; set; }
+        public List<int> InnerEquipmentIdList { get; set; }
     }
 }

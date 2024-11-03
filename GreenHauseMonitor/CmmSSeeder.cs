@@ -22,8 +22,16 @@ namespace Cmms
         {
             if (_dbContext.Database.CanConnect())
             {
-                if (false)
+                if (true)
                 {
+
+                    if (!_dbContext.Addresses.Any())
+                    {
+                        var addressesList = GetAddressesList();
+                        _dbContext.Addresses.AddRange(addressesList);
+                        _dbContext.SaveChanges();
+                    }
+                    
                     if (!_dbContext.Restaurants.Any())
                     {
                         var restaurantList = GetRestaurantList();
@@ -38,10 +46,23 @@ namespace Cmms
                         _dbContext.SaveChanges();
                     }
 
+                    if (!_dbContext.Suppliers.Any())
+                    {
+                        var suppliersList = GetSupplierList();
+                        _dbContext.Suppliers.AddRange(suppliersList);
+                        _dbContext.SaveChanges();
+                    }
+
                     if (!_dbContext.Users.Any())
                     {
                         var usersList = GetUsersList();
                         _dbContext.Users.AddRange(usersList);
+                        _dbContext.SaveChanges();
+                    }
+                    if (!_dbContext.QuestTypes.Any())
+                    {
+                        var questTypeList = GetQuestTypeList();
+                        _dbContext.QuestTypes.AddRange(questTypeList);
                         _dbContext.SaveChanges();
                     }
                     if (!_dbContext.Quests.Any())
@@ -68,6 +89,28 @@ namespace Cmms
                         _dbContext.EquipmentToEquipments.AddRange(equipmentList);
                         _dbContext.SaveChanges();
                     }
+
+                    if (!_dbContext.EquipmentSets.Any())
+                    {
+                        var equipmentSetList = GetEquipmentSetList();
+                        _dbContext.EquipmentSets.AddRange(equipmentSetList);
+                        _dbContext.SaveChanges();
+                    }
+
+                    if (!_dbContext.EquipmentSetToEquipments.Any())
+                    {
+                        var equipmentSeToEquipmenttList = GetEquipmentSetToEquipmentList();
+                        _dbContext.EquipmentSetToEquipments.AddRange(equipmentSeToEquipmenttList);
+                        _dbContext.SaveChanges();
+                    }
+
+                    if (!_dbContext.Orders.Any())
+                    {
+                        var orderstList = GetOrderList();
+                        _dbContext.Orders.AddRange(orderstList);
+                        _dbContext.SaveChanges();
+                    }
+
 
 
                     if (!_dbContext.QuestToEquipments.Any())
@@ -118,6 +161,37 @@ namespace Cmms
             }
         }
 
+        private IEnumerable<Supplier> GetSupplierList()
+        {
+            var suppliers = new List<Supplier>()
+            {
+                new Supplier() { Name = "Suplier1"
+                }
+            };
+            return suppliers;
+
+        }
+        private IEnumerable<Order> GetOrderList()
+        {
+            var orders = new List<Order>()
+            {
+                new Order() { Name = "Order1", SupplierId = _dbContext.Suppliers.First().Id
+                }
+            };
+            return orders;
+
+        }
+
+        private IEnumerable<Address> GetAddressesList()
+        {
+            var adrdresses = new List<Address>()
+            {
+                new Address() {City = "Łapczyca",PostalCode = "32-744",Street = "Kalinowa"
+                }
+            };
+            return adrdresses;
+
+        }
         private IEnumerable<Restaurant> GetRestaurantList()
         {
             var restaurants = new List<Restaurant>(){
@@ -236,15 +310,43 @@ namespace Cmms
 
         }
 
+        private IEnumerable<QuestType> GetQuestTypeList() 
+        {
+            var questTypes = new List<QuestType>()
+            {
+                new QuestType(){
+                    Name = "qt1",
+                    DefaultPriority = 1,
+                    CreationDateTime = DateTime.Now,
+                    LastModifyDateTime = DateTime.Now
+                },
+                new QuestType(){
+                    Name = "qt2",
+                    DefaultPriority = 2,
+                    CreationDateTime = DateTime.Now,
+                    LastModifyDateTime = DateTime.Now
+                },
+                 new QuestType(){
+                    Name = "qt3",
+                    DefaultPriority = 3,
+                    CreationDateTime = DateTime.Now,
+                    LastModifyDateTime = DateTime.Now
+                }
+            };
+            return questTypes;
+        }
+
         private IEnumerable<Quest> GetQuestsList()
         {
             var users = _dbContext.Users.OrderBy(o => o.Id);
+            var types = _dbContext.QuestTypes.OrderBy(o => o.Id);
             var quests = new List<Quest>()
             {
                 new Quest(){
                     Name = "q1",
                     Description = "q1",
                     Priority = 0,
+                    QuestTypeId = types.First().Id,
                     CreatedByUserId = users.First().Id,
                     LastModifyByUserId = users.First().Id,
                     DeadLineDataTime = new DateTime(2024,02,20),
@@ -255,6 +357,7 @@ namespace Cmms
                     Name = "q2",
                     Description = "q2",
                     Priority = 1,
+                    QuestTypeId = types.Last().Id,
                     CreatedByUserId = users.Last().Id,
                     LastModifyByUserId = users.Last().Id,
                     DeadLineDataTime = new DateTime(2024,02,20),
@@ -265,6 +368,7 @@ namespace Cmms
                     Name = "q3",
                     Description = "q3",
                     Priority = 2,
+                    QuestTypeId = types.First().Id,
                     CreatedByUserId = users.Last().Id,
                     LastModifyByUserId = users.Last().Id,
                     DeadLineDataTime = new DateTime(2024,02,20),
@@ -274,7 +378,29 @@ namespace Cmms
             };
             return quests;
         }
+        private IEnumerable<EquipmentSet> GetEquipmentSetList()
+        {
+            var equipmentSets = new List<EquipmentSet>()
+            {
+                new EquipmentSet() { Name = "EquipmentSet1",Description = "EquipmentSet1_Description"
+                }
+            };
+            return equipmentSets;
 
+        }
+        private IEnumerable<EquipmentSetToEquipment> GetEquipmentSetToEquipmentList()
+        {
+            var equipmentSetToEquipments = new List<EquipmentSetToEquipment>();
+
+            var eqSet = _dbContext.EquipmentSets.First();
+            foreach (var item in _dbContext.Equipments)
+            {
+                equipmentSetToEquipments.Add(new EquipmentSetToEquipment() { EquipmentID = item.Id, EquipmentSetID = eqSet.Id });
+
+            }
+            return equipmentSetToEquipments;
+
+        }
         private IEnumerable<Equipment> GetEquipmentList()
         {
             var equipments = new List<Equipment>()
@@ -316,18 +442,16 @@ namespace Cmms
 
         private IEnumerable<EquipmentToEquipment> GetEquipmentToEquipmentList()
         {
-            var equipments = new List<EquipmentToEquipment>()
+            var equipmentToEquipents = new List<EquipmentToEquipment>();
+            var prevEqID = 0;
+            foreach (var item in _dbContext.Equipments)
             {
-                new EquipmentToEquipment(){
-                   PrimalEquipmentId = _dbContext.Equipments.OrderBy(o => o.Id).First().Id,
-                   InnerEquipmentId = _dbContext.Equipments.OrderBy(o => o.Id).Last().Id
-                },
-                new EquipmentToEquipment(){
-                   PrimalEquipmentId = _dbContext.Equipments.OrderBy(o => o.Id).Last().Id,
-                   InnerEquipmentId = _dbContext.Equipments.OrderBy(o => o.Id).First().Id
-                },
-            };
-            return equipments;
+                if (prevEqID != 0) { 
+                    equipmentToEquipents.Add(new EquipmentToEquipment() { PrimalEquipmentId = prevEqID, InnerEquipmentId = item.Id });
+                }
+                prevEqID = item.Id;
+            }            
+            return equipmentToEquipents;
         }
 
         private IEnumerable<QuestToUser> GetQuestToUsersList()
@@ -345,7 +469,7 @@ namespace Cmms
         {
             var questToEquipments = new List<QuestToEquipment>()
            { new QuestToEquipment(){
-               QuestId = _dbContext.Equipments.OrderBy(o => o.Id).First().Id,
+               QuestId = _dbContext.Quests.OrderBy(o => o.Id).First().Id,
                EquipmentId = _dbContext.Equipments.OrderBy(o => o.Id).Last().Id               
            }
            };
