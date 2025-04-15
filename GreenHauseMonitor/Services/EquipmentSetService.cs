@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Cmms.Authorization;
-using Cmms.EntitieDbCOntext;
-using Cmms.Entities;
-using Cmms.Entities.Settings;
 using Cmms.Excepction;
-using Cmms.Models;
+using Cmms.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,6 +13,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Cmms.DataAccess.EntitieDbCOntext;
+using Cmms.Domain.Entities;
 
 namespace Cmms.Services
 {

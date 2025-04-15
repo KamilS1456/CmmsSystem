@@ -1,5 +1,5 @@
-﻿using Cmms.Models;
-using Cmms.Models.Respones;
+﻿using Cmms.Core.Models;
+using Cmms.Core.Respones;
 using System;
 using System.Collections.Generic;
 using System.Linq;

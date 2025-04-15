@@ -1,4 +1,4 @@
-﻿using Cmms.Models;
+﻿using Cmms.Core.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Security.Claims;

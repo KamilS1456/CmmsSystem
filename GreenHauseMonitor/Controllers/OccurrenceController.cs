@@ -1,5 +1,4 @@
-﻿using Cmms.Entities;
-using Cmms.Models;
+﻿using Cmms.Core.Models;
 using Cmms.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

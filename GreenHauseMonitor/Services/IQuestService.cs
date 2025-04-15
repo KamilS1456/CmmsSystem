@@ -1,5 +1,5 @@
-﻿using Cmms.Entities;
-using Cmms.Models;
+﻿using Cmms.Domain.Entities;
+using Cmms.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 

@@ -1,8 +1,9 @@
-﻿using Cmms.Models;
+﻿using Cmms.Core.Models;
 using Cmms.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cmms.Controllers
 {
@@ -20,7 +21,7 @@ namespace Cmms.Controllers
 
         [HttpPost]
         //[Authorize(Roles = "Admin,Manager")]
-        public ActionResult CreateEquipment([FromBody] EquipmentDto equipmentDto)
+        public async Task<ActionResult> CreateEquipment([FromBody] EquipmentDto equipmentDto)
         {
             var id = _service.Create(equipmentDto);
             return Created($"/api/equipment/{id}", null);
@@ -29,22 +30,23 @@ namespace Cmms.Controllers
         [HttpGet]
         //[Authorize(Roles = "Admin,Manager,User")]
 
-        public ActionResult<List<EquipmentDto>> GetAll()
+        public async Task<ActionResult<List<EquipmentDto>>> GetAll()
         {
-            return Ok(_service.GetAll());
+            var allEquipment = _service.GetAll();
+            return Ok(allEquipment);
         }
 
         [HttpGet("{id}")]
         //[Authorize(Policy = "AtLeast18")]
-        public ActionResult<EquipmentDto> Get([FromRoute] int id)
+        public async Task<ActionResult<EquipmentDto>> Get([FromRoute] int id)
         {
-            var equipment = _service.GetById(id);
+            var equipment =  _service.GetById(id);
             return Ok(equipment);
 
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete([FromRoute] int id)
+        public async Task<ActionResult> Delete([FromRoute] int id)
         {
             _service.Delete(id);
             return NoContent();
@@ -53,7 +55,7 @@ namespace Cmms.Controllers
 
         [HttpPut("{id}")]
         //[AllowAnonymous] aby działął bez autoryzacji
-        public ActionResult Update([FromRoute] int id, [FromBody] UpdateEquipmentDto updateEquipment)
+        public async Task<ActionResult> Update([FromRoute] int id, [FromBody] UpdateEquipmentDto updateEquipment)
         {
             _service.Update(id, updateEquipment);
             return NoContent();

@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="FluentValidation" Version="11.5.1" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="MediatR" Version="12.5.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	  <Folder Include="Requests\Quest\" />
+	  <Folder Include="Respones\QuestResponse\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Queries\UserProfilesQueries\GetAllUserProfilesQuery.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Cmms.DataAccess\Cmms.DataAccess.csproj" />
+	  <ProjectReference Include="..\Cmms.Domain\Cmms.Domain.csproj" />
+	</ItemGroup>
+
+
+
+</Project>

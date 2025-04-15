@@ -1,44 +1,40 @@
-﻿using Cmms.Models;
+﻿using Cmms.Domain.Entities;
+using Cmms.Core.Models;
+using Cmms.Core.Queries.QuestQueries;
+using Cmms.Queries.QuestQueries;
 using Cmms.Services;
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Cmms.Controllers
 {
 
-    [Route("api/quest")]
+    [Route(ApiRoutes.BaseRoute)]
     [ApiController]
     //[Authorize]
     public class QuestController : ControllerBase
     {
         private readonly IQuestService _service;
-        public QuestController(IQuestService service)
+        private readonly IMediator _mediator;
+        public QuestController(IQuestService service, IMediator mediator)
         {
             _service = service;
+            _mediator = mediator;
         }
 
-
-        //[HttpPost]
-        //[Authorize(Roles = "Admin,Manager")]
-        //public ActionResult CreateRestaurant([FromBody] CreateQuestDto questDto)
-        //{
-        //    var id = _service.(questDto);
-        //    return Created($"/api/quest/{id}", null);
-        //}
-
-        [HttpGet("{id}")]
-        public ActionResult<QuestDto> Get([FromRoute] int id)
+        [HttpGet(ApiRoutes.Quests.GetById)]
+        public async Task<Quest> GetById([FromRoute] int id)
         {
-            var quest = _service.GetById(id);
-            return Ok(quest);
+            //var quest = _service.GetById(id);
+            return await _mediator.Send(new GetQuestByIdQuery(id));
         }
 
         [HttpGet]
-        public ActionResult<List<QuestDto>> GetAll()
+        public async Task<List<Quest>> GetAll()
         {
-            var questList = _service.GetAll();
-            return Ok(questList);
+           return await _mediator.Send(new GetQuestListQuery());
         }
 
         [HttpDelete("{id}")]

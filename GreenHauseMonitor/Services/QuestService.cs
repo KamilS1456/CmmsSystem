@@ -1,15 +1,14 @@
 ﻿using AutoMapper;
 using Cmms.Authorization;
-using Cmms.EntitieDbCOntext;
-using Cmms.Entities;
 using Cmms.Excepction;
-using Cmms.Models;
+using Cmms.Core.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using Cmms.DataAccess.EntitieDbCOntext;
+using Cmms.Domain.Entities;
 
 namespace Cmms.Services
 {
@@ -31,7 +30,7 @@ namespace Cmms.Services
         [Authorize(Roles = "Admin,Menager,User")]
         public QuestDto GetById(int id)
         {
-            var quest = _dbContext.Quests.Include(i =>i.QuestToUserList).ThenInclude(t => t.User).FirstOrDefault(f => f.Id == id);
+            var quest = _dbContext.Quests.Include(i =>i.QuestToUserList).FirstOrDefault(f => f.Id == id);
             if (quest is null)
             {
                 throw new NotFoundException("Quest not found");
@@ -41,7 +40,7 @@ namespace Cmms.Services
 
         public List<QuestDto> GetAll()
         {
-            var questList = _dbContext.Quests.Include(i => i.QuestToUserList).ThenInclude(t => t.User);
+            var questList = _dbContext.Quests.Include(i => i.QuestToUserList);
 
             return _mapper.Map<List<QuestDto>>(questList);
         }
@@ -51,13 +50,13 @@ namespace Cmms.Services
             var quest = _mapper.Map<Quest>(questDto);
             quest.CreatedByUserId = _userContextService.GetUserId;
             _dbContext.Quests.Add(quest);
-            foreach (var questToUsersDto in questDto.AssignedUsers)
-            {
-                var questTouser = _mapper.Map<QuestToUser>(questToUsersDto);
-                questTouser.QuestId = quest.Id;
-                _dbContext.QuestToUsers.Add(questTouser);
+            //foreach (var questToUsersDto in questDto.AssignedUsers)
+            //{
+            //    var questTouser = _mapper.Map<QuestToUser>(questToUsersDto);
+            //    questTouser.QuestId = quest.Id;
+            //    _dbContext.QuestToUsers.Add(questTouser);
 
-            }
+            //}
             foreach (var questToEquipmentDto in questDto.TargetedEquipments)
             {
                 var questToEquipment = _mapper.Map<QuestToEquipment>(questToEquipmentDto);
@@ -87,12 +86,12 @@ namespace Cmms.Services
 
         public void Update(int id, QuestDto updateRestaurant)
         {
-            var restaurant = _dbContext.Restaurants.FirstOrDefault(f => f.Id == id);
-            if (restaurant is null)
+            var quest = _dbContext.Quests.FirstOrDefault(f => f.Id == id);
+            if (quest is null)
             {
                 throw new NotFoundException("Restaurant not found");
             }
-            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, restaurant, new ResourcesOperationRequirement(ResourceOperation.Update)).Result;
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, quest, new ResourcesOperationRequirement(ResourceOperation.Update)).Result;
             if (!authorizationResult.Succeeded)
             {
                 throw new ForbidException();
