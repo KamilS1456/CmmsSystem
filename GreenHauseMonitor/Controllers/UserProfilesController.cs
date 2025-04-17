@@ -1,7 +1,4 @@
-﻿using Cmms.Domain.Entities;
-using Cmms.Core.Queries.QuestQueries;
-using Cmms.Core.Requests.UserProfileRequests;
-using Cmms.Queries.QuestQueries;
+﻿
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,16 +6,19 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using Cmms.Core.Commands.UserProfileCommands;
-using Cmms.Core.Respones.UserProfileResponse;
+using Cmms.Respones.UserProfileResponse;
 using System.Threading;
 using System;
 using Cmms.Core.Queries.UserProfilesQueries;
+using System.Linq;
+using Cmms.Requests.UserProfileRequests;
+using Cmms.Respones.Common;
 
 namespace Cmms.Controllers
 {
     [Route(ApiRoutes.BaseRoute)]
     [ApiController]
-    public class UserProfilesController : ControllerBase
+    public class UserProfilesController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -43,8 +43,13 @@ namespace Cmms.Controllers
         {
             var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
             var response = await _mediator.Send(query, cancellationToken);
+
+            if (response is null) {
+                return NotFound();
+            }
             var userProfile = _mapper.Map<UserProfileResponse>(response);
 
+            
             //if (response.IsError)
             //    return HandleErrorResponse(response.Errors);
 
@@ -68,8 +73,9 @@ namespace Cmms.Controllers
         {
             var command = _mapper.Map<UpdateUserProfileCommand>(basicInfo);
             command.UserProfileId = Guid.Parse(id);
-            await _mediator.Send(command);
-            return NoContent();
+            var response = await _mediator.Send(command);
+
+            return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
         }
 
         [HttpDelete]

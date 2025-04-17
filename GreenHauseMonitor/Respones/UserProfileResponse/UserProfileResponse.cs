@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Cmms.Core.Respones.UserProfileResponse
+namespace Cmms.Respones.UserProfileResponse
 {
     public record UserProfileResponse
     {

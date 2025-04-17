@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cmms.Core.Respones.UserProfileResponse
+namespace Cmms.Respones.UserProfileResponse
 {
     public class UserProfileBasicInfoResponse
     {

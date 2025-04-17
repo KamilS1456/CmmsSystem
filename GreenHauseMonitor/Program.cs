@@ -94,7 +94,6 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Cm
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 //builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllUserProfiles));
 //builder.Services.AddMediatR(typeof(GetAllUserProfiles));
-builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IQuestService, QuestService>();
 builder.Services.AddScoped<IEquipmentService, EquipmentService>();
 builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();

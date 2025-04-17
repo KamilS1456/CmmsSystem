@@ -22,6 +22,8 @@
   <ItemGroup>
     <Folder Include="Handlers\" />
     <Folder Include="PrivateFiles\" />
+    <Folder Include="Requests\Quest\" />
+    <Folder Include="Respones\QuestResponse\" />
   </ItemGroup>
 
   <ItemGroup>

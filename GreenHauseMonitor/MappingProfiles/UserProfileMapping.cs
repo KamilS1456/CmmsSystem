@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Cmms.Core.Commands.UserProfileCommands;
-using Cmms.Core.Requests.UserProfileRequests;
-using Cmms.Core.Respones.UserProfileResponse;
+using Cmms.Requests.UserProfileRequests;
+using Cmms.Respones.UserProfileResponse;
 using Cmms.Domain.Entities;
 
 namespace Cmms.MappingProfiles

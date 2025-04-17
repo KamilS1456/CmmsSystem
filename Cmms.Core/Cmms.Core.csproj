@@ -16,8 +16,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Migrations\" />
-	  <Folder Include="Requests\Quest\" />
-	  <Folder Include="Respones\QuestResponse\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,14 +1,7 @@
 ﻿using Cmms.Core.Commands.UserProfileCommands;
 using Cmms.Domain.Entities;
-using Cmms.Core.Respones.UserProfileResponse;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Cmms.DataAccess.EntitieDbCOntext;
-using AutoMapper;
 
 namespace Cmms.Core.Handlers.UserProfileHandlers.UserProfileCommandHandlers
 {
