@@ -8,8 +8,14 @@ namespace Cmms.Core.Enums
 {
     public enum ErrorCode
     {
+
+        ValidationError = 101,
+
         NotFound = 404,
-        ServerError = 500
+        ServerError = 500,
+
+
+        UnknownError = 999
 
     }
 }

@@ -1,9 +1,10 @@
-﻿using Cmms.Domain.Entities;
+﻿using Cmms.Core.Models;
+using Cmms.Domain.Entities;
 using MediatR;
 
 namespace Cmms.Core.Commands.UserProfileCommands
 {
-    public class CreateUserProfileCommand : IRequest<UserProfile>
+    public class CreateUserProfileCommand : IRequest<OperationResult<UserProfile>>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
