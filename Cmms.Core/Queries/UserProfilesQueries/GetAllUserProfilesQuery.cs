@@ -1,4 +1,5 @@
-﻿using Cmms.Domain.Entities;
+﻿using Cmms.Core.Models;
+using Cmms.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Queries.UserProfilesQueries
 {
-    public class GetAllUserProfilesQuery : IRequest<IEnumerable<UserProfile>>
+    public class GetAllUserProfilesQuery : IRequest<OperationResult<IEnumerable<UserProfile>>>
     {
         public GetAllUserProfilesQuery()
         {

@@ -1,7 +1,9 @@
 ﻿using Cmms.Core.Commands.UserProfileCommands;
+using Cmms.Core.Enums;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
 using Cmms.Domain.Entities;
+using Cmms.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,31 +31,28 @@ namespace Cmms.Core.Handlers.UserProfileHandlers.UserProfileCommandHandlers
             {
                 var userProfile = await _cmmsDbContext.UserProfileS.FirstOrDefaultAsync(x => x.UserProfileId == request.UserProfileId);
 
-                if (userProfile is null) {
-                    result.IsError = true;
-                    result.ErrorList.Add(
-                        new Error() { Code = Enums.ErrorCode.NotFound, 
-                        Message = string.Format("No UserProfile found for ID {0}", request.UserProfileId) }
-                        );
+                if (userProfile is null)
+                {
+                    result.AddError(ErrorCode.NotFound, string.Format("No UserProfile found for ID {0}", request.UserProfileId));
                     return result;
                 }
                 var basicInfo = UserProfileBasicInfo.CreateBasicInfo(request.FirstName, request.LastName, request.EmailAddress,
                     request.Phone, request.DateOfBirth, request.CurrentCity);
+
                 userProfile.UpdateBasicInfo(basicInfo);
+
                 _cmmsDbContext.UserProfileS.Update(userProfile);
                 await _cmmsDbContext.SaveChangesAsync(cancellationToken);
+
                 result.Payload = userProfile;
 
+                return result;
+            } catch (UserProfileNotValidException ex){
+                ex.ValidationErrors.ForEach(e => result.AddError(ErrorCode.ValidationError, e));
+            } catch (Exception e){
+                result.AddUnknownError(e.Message);
             }
-            catch (Exception ex)
-            {
-                result.IsError = true;
-                result.ErrorList.Add(new Error() {Code = Enums.ErrorCode.ServerError, Message = ex.Message });
-            }
-
             return result;
-
-
         }
     }
 }

@@ -1,5 +1,4 @@
 using Cmms.Authorization;
-using Cmms.Validators;
 using Cmms.Core.Models;
 using Cmms.Services;
 using Cmms;
@@ -18,12 +17,12 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Reflection;
-using Cmms.Domain.Entities;
 using Cmms.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Cmms.Core;
 using Cmms.DataAccess.EntitieDbCOntext;
+using Cmms.Filters;
 
 
 var builder = WebApplication.CreateBuilder();
@@ -77,6 +76,10 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
 });
 AddAuthorizationHandlers(builder.Services);
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(typeof(CmmsExceptionHandler));
+});
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -100,7 +103,6 @@ builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();
 builder.Services.AddScoped<IOccurrenceService, OccurrenceService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<IdentityUser>, PasswordHasher<IdentityUser>>();
-builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidators>();
 builder.Services.AddScoped<RequestTimerMiddleware>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddHttpContextAccessor();

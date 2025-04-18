@@ -1,5 +1,9 @@
 ﻿using Cmms.Core.Commands.UserProfileCommands;
+using Cmms.Core.Enums;
+using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
+using Cmms.Domain.Entities;
+using Cmms.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,21 +14,37 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Handlers.UserProfileHandlers.UserProfileCommandHandlers
 {
-    class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand>
+    class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand, OperationResult<UserProfile>>
     {
         private readonly CmmsDbContext _cmmsDbContext;
         public DeleteUserProfileCommandHandler(CmmsDbContext cmmsDbContext)
         {
             _cmmsDbContext = cmmsDbContext;
         }
-        public async Task Handle(DeleteUserProfileCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<UserProfile>> Handle(DeleteUserProfileCommand request, CancellationToken cancellationToken)
         {
-            var userProfile = await _cmmsDbContext.UserProfileS.FirstOrDefaultAsync(f => f.UserProfileId == request.UserProfileId);
-            if (userProfile is null) {
-                return;
+            var result = new OperationResult<UserProfile>();
+
+            try
+            {
+                var userProfile = await _cmmsDbContext.UserProfileS.FirstOrDefaultAsync(f => f.UserProfileId == request.UserProfileId);
+                result.Payload = userProfile;
+                if (userProfile is null)
+                {
+                    result.AddError(ErrorCode.NotFound, string.Format("No UserProfile found for ID {0}", request.UserProfileId));
+                }
+                else
+                {
+                    _cmmsDbContext.UserProfileS.Remove(userProfile);
+                    await _cmmsDbContext.SaveChangesAsync();
+                }
+            } catch (UserProfileNotValidException ex){
+                ex.ValidationErrors.ForEach(e => result.AddError(ErrorCode.ValidationError, e));
+            } catch (Exception e){
+                result.AddUnknownError(e.Message);
             }
-            _cmmsDbContext.UserProfileS.Remove(userProfile);
-            await _cmmsDbContext.SaveChangesAsync();
+
+            return result;
         }
     }
 }

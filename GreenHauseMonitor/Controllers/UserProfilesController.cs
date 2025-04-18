@@ -13,6 +13,8 @@ using Cmms.Core.Queries.UserProfilesQueries;
 using System.Linq;
 using Cmms.Requests.UserProfileRequests;
 using Cmms.Respones.Common;
+using Cmms.Api.Filters;
+using Cmms.Filters;
 
 namespace Cmms.Controllers
 {
@@ -32,43 +34,41 @@ namespace Cmms.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new GetAllUserProfilesQuery());
-            var profiles = _mapper.Map<List<UserProfileResponse>>(response);
+            var profiles = _mapper.Map<List<UserProfileResponse>>(response.Payload);
             return Ok(profiles);
         }
 
         
         [HttpGet]
         [Route(ApiRoutes.UserProfiles.IdRoute)]
+        [ValidateGuid("id")]
         public async Task<IActionResult> GetUserProfileById(string id, CancellationToken cancellationToken)
         {
             var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
             var response = await _mediator.Send(query, cancellationToken);
 
-            if (response is null) {
-                return NotFound();
-            }
-            var userProfile = _mapper.Map<UserProfileResponse>(response);
+            if (response.IsError)
+                return HandleErrorResponse(response.ErrorList);
 
-            
-            //if (response.IsError)
-            //    return HandleErrorResponse(response.Errors);
-
-            //var userProfile = UserProfileResponse.FromUserProfileDto(response.Payload);
+            var userProfile = _mapper.Map<UserProfileResponse>(response.Payload);
             return Ok(userProfile);
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreate userProfile)
         {
             var command = _mapper.Map<CreateUserProfileCommand>(userProfile);
             var result = await _mediator.Send(command);
-            var userProfileResponse = _mapper.Map<UserProfileResponse>(result);
-            return CreatedAtAction(nameof(GetUserProfileById), new { id = result.UserProfileId}, userProfile);
+            var userProfileResponse = _mapper.Map<UserProfileResponse>(result.Payload);
+            return CreatedAtAction(nameof(GetUserProfileById), new { id = result.Payload.UserProfileId}, userProfile);
         }
 
 
         [HttpPatch]
         [Route(ApiRoutes.UserProfiles.IdRoute)]
+        [ValidateModel]
+        [ValidateGuid("id")]
         public async Task<IActionResult> UpdateUserProfile(string id, [FromBody] UserProfileUpdate basicInfo)
         {
             var command = _mapper.Map<UpdateUserProfileCommand>(basicInfo);
@@ -79,13 +79,14 @@ namespace Cmms.Controllers
         }
 
         [HttpDelete]
-        [Route(ApiRoutes.UserProfiles.IdRoute)] 
+        [Route(ApiRoutes.UserProfiles.IdRoute)]
+        [ValidateGuid("id")]
         public async Task<IActionResult> DeleteUserProfile(string id)
         {
             var deleteCommand = new DeleteUserProfileCommand() {UserProfileId = Guid.Parse(id) };
-            await _mediator.Send(deleteCommand);
+            var response = await _mediator.Send(deleteCommand);
 
-            return NoContent();
+            return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
         }
 
 

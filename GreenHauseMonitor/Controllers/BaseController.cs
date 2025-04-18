@@ -15,11 +15,6 @@ namespace Cmms.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private IMediator _mediatorInstance;
-        private IMapper _mapperInstance;
-        protected IMediator _mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
-        protected IMapper _mapper => _mapperInstance ??= HttpContext.RequestServices.GetService<IMapper>();
-
         protected IActionResult HandleErrorResponse(List<Error> errors)
         {
             var apiError = new ErrorResponse();
