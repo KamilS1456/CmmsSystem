@@ -24,11 +24,9 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -51,23 +49,21 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Equipment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Condition")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -94,14 +90,12 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.EquipmentSet", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -110,8 +104,8 @@ namespace Cmms.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -127,17 +121,15 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.EquipmentSetToEquipment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("EquipmentID")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("EquipmentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EquipmentSetID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("EquipmentSetID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -150,14 +142,12 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Occurrence", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -166,11 +156,11 @@ namespace Cmms.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EquipmentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -181,8 +171,8 @@ namespace Cmms.DataAccess.Migrations
                     b.Property<DateTime>("OccurrenceDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OccurrenceTypeId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("OccurrenceTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
@@ -198,14 +188,12 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.OccurrenceType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -213,8 +201,8 @@ namespace Cmms.DataAccess.Migrations
                     b.Property<int>("DefaultPriority")
                         .HasColumnType("int");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -230,14 +218,12 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -249,8 +235,8 @@ namespace Cmms.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -275,8 +261,8 @@ namespace Cmms.DataAccess.Migrations
                     b.Property<DateTime>("RequestyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -287,20 +273,18 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Project", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -314,16 +298,14 @@ namespace Cmms.DataAccess.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.Quest", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.Quest", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -335,8 +317,8 @@ namespace Cmms.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -351,8 +333,8 @@ namespace Cmms.DataAccess.Migrations
                     b.Property<int>("QuestState")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestTypeId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("QuestTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -361,42 +343,36 @@ namespace Cmms.DataAccess.Migrations
                     b.ToTable("Quests");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.QuestToEquipment", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.QuestToEquipment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("EquipmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("QuestId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EquipmentId");
 
                     b.HasIndex("QuestId");
 
                     b.ToTable("QuestToEquipments");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.QuestToUser", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.QuestToUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<Guid>("QuestId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("QuestId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("userInQuestResponsability")
                         .HasColumnType("int");
@@ -410,14 +386,12 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.QuestType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
@@ -425,8 +399,8 @@ namespace Cmms.DataAccess.Migrations
                     b.Property<int>("DefaultPriority")
                         .HasColumnType("int");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -442,20 +416,18 @@ namespace Cmms.DataAccess.Migrations
 
             modelBuilder.Entity("Cmms.Domain.Entities.Supplier", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("CreatedByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("CreatedByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LastModifyByUserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("LastModifyByUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifyDateTime")
                         .HasColumnType("datetime2");
@@ -737,7 +709,7 @@ namespace Cmms.DataAccess.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.Quest", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.Quest", b =>
                 {
                     b.HasOne("Cmms.Domain.Entities.QuestType", "QuestType")
                         .WithMany()
@@ -748,34 +720,22 @@ namespace Cmms.DataAccess.Migrations
                     b.Navigation("QuestType");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.QuestToEquipment", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.QuestToEquipment", b =>
                 {
-                    b.HasOne("Cmms.Domain.Entities.Equipment", "Equipment")
-                        .WithMany()
-                        .HasForeignKey("EquipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cmms.Domain.Entities.Quest", "Quest")
+                    b.HasOne("Cmms.Domain.Entities.Quest.Quest", null)
                         .WithMany("QuestToEquipmentList")
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Equipment");
-
-                    b.Navigation("Quest");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.QuestToUser", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.QuestToUser", b =>
                 {
-                    b.HasOne("Cmms.Domain.Entities.Quest", "Quest")
+                    b.HasOne("Cmms.Domain.Entities.Quest.Quest", null)
                         .WithMany("QuestToUserList")
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Quest");
                 });
 
             modelBuilder.Entity("Cmms.Domain.Entities.UserProfile", b =>
@@ -876,7 +836,7 @@ namespace Cmms.DataAccess.Migrations
                     b.Navigation("EquipmentSetToEquipments");
                 });
 
-            modelBuilder.Entity("Cmms.Domain.Entities.Quest", b =>
+            modelBuilder.Entity("Cmms.Domain.Entities.Quest.Quest", b =>
                 {
                     b.Navigation("QuestToEquipmentList");
 

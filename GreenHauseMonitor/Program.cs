@@ -1,5 +1,4 @@
-using Cmms.Authorization;
-using Cmms.Core.Models;
+
 using Cmms.Services;
 using Cmms;
 using FluentValidation;
@@ -69,13 +68,6 @@ builder.Services.AddAuthentication(option =>
     };
 
 });
-builder.Services.AddAuthorization(options =>
-{
-    //options.AddPolicy("SettingAllowedOperation", builder => builder.AddRequirements(new SettingAllowedOperation(string.)));
-    options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "Polish", "string"));
-    options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
-});
-AddAuthorizationHandlers(builder.Services);
 builder.Services.AddControllersWithViews(options =>
 {
     options.Filters.Add(typeof(CmmsExceptionHandler));
@@ -97,10 +89,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Cm
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 //builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllUserProfiles));
 //builder.Services.AddMediatR(typeof(GetAllUserProfiles));
-builder.Services.AddScoped<IQuestService, QuestService>();
-builder.Services.AddScoped<IEquipmentService, EquipmentService>();
-builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();
-builder.Services.AddScoped<IOccurrenceService, OccurrenceService>();
+//builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+//builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();
+//builder.Services.AddScoped<IOccurrenceService, OccurrenceService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<IdentityUser>, PasswordHasher<IdentityUser>>();
 builder.Services.AddScoped<RequestTimerMiddleware>();
@@ -142,11 +133,6 @@ app.UseEndpoints(endpoints =>
 
 app.Run();
 
-void AddAuthorizationHandlers(IServiceCollection services) 
-{
-    services.AddScoped<IAuthorizationHandler, ResourcesOperationRequirementHandler>();
-    services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
-}
 
 //namespace GreenHauseMonitor
 //{

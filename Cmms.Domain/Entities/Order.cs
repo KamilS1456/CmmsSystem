@@ -13,7 +13,7 @@ namespace Cmms.Domain.Entities
         public OrderState OrderState { get; set; }
         public string PaymentDescription { get; set; }
         public decimal Price { get; set; }
-        public int SupplierId { get; set; }
+        public Guid SupplierId { get; set; }
 
         public virtual Supplier Supplier { get; set; }
     }

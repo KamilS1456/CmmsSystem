@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cmms.DataAccess.Migrations
 {
-    public partial class initMigration : Migration
+    public partial class init_MIgration_After_Switching_To_Guid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,7 @@ namespace Cmms.DataAccess.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     City = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     Street = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -67,16 +66,15 @@ namespace Cmms.DataAccess.Migrations
                 name: "Equipments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Condition = table.Column<int>(type: "int", nullable: false),
                     LastServiceDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -88,13 +86,12 @@ namespace Cmms.DataAccess.Migrations
                 name: "EquipmentSets",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -106,13 +103,12 @@ namespace Cmms.DataAccess.Migrations
                 name: "OccurrenceTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DefaultPriority = table.Column<int>(type: "int", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -124,12 +120,11 @@ namespace Cmms.DataAccess.Migrations
                 name: "Projects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -141,13 +136,12 @@ namespace Cmms.DataAccess.Migrations
                 name: "QuestTypes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DefaultPriority = table.Column<int>(type: "int", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -159,12 +153,11 @@ namespace Cmms.DataAccess.Migrations
                 name: "Suppliers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -302,10 +295,9 @@ namespace Cmms.DataAccess.Migrations
                 name: "EquipmentSetToEquipments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EquipmentSetID = table.Column<int>(type: "int", nullable: false),
-                    EquipmentID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EquipmentSetID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EquipmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -328,17 +320,16 @@ namespace Cmms.DataAccess.Migrations
                 name: "Occurrences",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OccurrenceDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EquipmentId = table.Column<int>(type: "int", nullable: false),
+                    EquipmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
-                    OccurrenceTypeId = table.Column<int>(type: "int", nullable: false),
+                    OccurrenceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OccuranceState = table.Column<int>(type: "int", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -362,17 +353,16 @@ namespace Cmms.DataAccess.Migrations
                 name: "Quests",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DeadLineDataTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
                     QuestState = table.Column<int>(type: "int", nullable: false),
-                    QuestTypeId = table.Column<int>(type: "int", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    QuestTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -390,8 +380,7 @@ namespace Cmms.DataAccess.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nr = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -400,10 +389,10 @@ namespace Cmms.DataAccess.Migrations
                     OrderState = table.Column<int>(type: "int", nullable: false),
                     PaymentDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    CreatedByUserId = table.Column<int>(type: "int", nullable: true),
+                    SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreationDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastModifyByUserId = table.Column<int>(type: "int", nullable: false),
+                    LastModifyByUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastModifyDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -421,20 +410,13 @@ namespace Cmms.DataAccess.Migrations
                 name: "QuestToEquipments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestId = table.Column<int>(type: "int", nullable: false),
-                    EquipmentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EquipmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_QuestToEquipments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QuestToEquipments_Equipments_EquipmentId",
-                        column: x => x.EquipmentId,
-                        principalTable: "Equipments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_QuestToEquipments_Quests_QuestId",
                         column: x => x.QuestId,
@@ -447,10 +429,9 @@ namespace Cmms.DataAccess.Migrations
                 name: "QuestToUsers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    QuestId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    QuestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     userInQuestResponsability = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -534,11 +515,6 @@ namespace Cmms.DataAccess.Migrations
                 column: "QuestTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuestToEquipments_EquipmentId",
-                table: "QuestToEquipments",
-                column: "EquipmentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_QuestToEquipments_QuestId",
                 table: "QuestToEquipments",
                 column: "QuestId");
@@ -600,13 +576,13 @@ namespace Cmms.DataAccess.Migrations
                 name: "EquipmentSets");
 
             migrationBuilder.DropTable(
+                name: "Equipments");
+
+            migrationBuilder.DropTable(
                 name: "OccurrenceTypes");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Equipments");
 
             migrationBuilder.DropTable(
                 name: "Quests");

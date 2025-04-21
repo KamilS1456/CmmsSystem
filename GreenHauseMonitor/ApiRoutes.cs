@@ -11,7 +11,12 @@
 
         public class Quests
         {
-            public const string GetById = "{id}";
+            public const string IdRoute = "{id}";
+        }
+
+        public class QuestTypes
+        {
+            public const string IdRoute = "{id}";
         }
     }
 }

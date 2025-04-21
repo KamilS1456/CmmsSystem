@@ -1,4 +1,5 @@
-﻿using Cmms.Domain.Entities;
+﻿using Cmms.Core.Models;
+using Cmms.Domain.Entities.Quest;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,6 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Queries.QuestQueries
 {
-    public record GetQuestByIdQuery(int Id) : IRequest<Quest> ;
+    public record GetQuestByIdQuery(Guid Id) : IRequest<OperationResult<Quest>> ;
 
 }

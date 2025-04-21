@@ -1,9 +1,10 @@
-﻿using Cmms.Domain.Entities;
+﻿using Cmms.Core.Models;
+using Cmms.Domain.Entities.Quest;
 using MediatR;
 
 namespace Cmms.Queries.QuestQueries
 {
-    public record GetQuestListQuery() : IRequest<List<Quest>>;
+    public record GetQuestListQuery() : IRequest<OperationResult<IEnumerable<Quest>>>;
 
 }
 

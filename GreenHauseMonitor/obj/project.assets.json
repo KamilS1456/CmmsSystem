@@ -1164,6 +1164,9 @@
       "Cmms.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FluentValidation": "11.5.1"
+        },
         "compile": {
           "bin/placeholder/Cmms.Domain.dll": {}
         },

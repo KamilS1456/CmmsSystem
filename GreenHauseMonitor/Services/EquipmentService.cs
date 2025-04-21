@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Cmms.Authorization;
 using Cmms.Excepction;
 using Cmms.Core.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,81 +17,82 @@ using Cmms.Domain.Entities;
 
 namespace Cmms.Services
 {
-    public class EquipmentService : IEquipmentService
+    public class EquipmentService //: IEquipmentService
     {
-        private readonly CmmsDbContext _dbContext;
-        private readonly IMapper _mapper;
-        private readonly ILogger<EquipmentService> _logger;
-        private readonly IAuthorizationService _authorizationService;
-        private readonly IUserContextService _userContextService;
-        public EquipmentService(CmmsDbContext dbContext, IMapper mapper, ILogger<EquipmentService> logger, IAuthorizationService authorizationService, IUserContextService userContextService)
-        {
-            _dbContext = dbContext;
-            _mapper = mapper;
-            _logger = logger;
-            _authorizationService = authorizationService;
-            _userContextService = userContextService;
-        }
+        //private readonly CmmsDbContext _dbContext;
+        //private readonly IMapper _mapper;
+        //private readonly ILogger<EquipmentService> _logger;
+        //private readonly IAuthorizationService _authorizationService;
+        //private readonly IUserContextService _userContextService;
+        //public EquipmentService(CmmsDbContext dbContext, IMapper mapper, ILogger<EquipmentService> logger, IAuthorizationService authorizationService, IUserContextService userContextService)
+        //{
+        //    _dbContext = dbContext;
+        //    _mapper = mapper;
+        //    _logger = logger;
+        //    _authorizationService = authorizationService;
+        //    _userContextService = userContextService;
+        //}
 
-        public int Create(EquipmentDto equipmentServiceDto)
-        {
-            var equipment = _mapper.Map<Equipment>(equipmentServiceDto);
-            equipment.CreatedByUserId = _userContextService.GetUserId;
-            _dbContext.Equipments.Add(equipment);
-            _dbContext.SaveChanges();
-            return equipment.Id;
-        }
-        public List<EquipmentDto> GetAll()
-        {
-            var equipmentList = _dbContext.Equipments;
-            var equipmentDtoList = _mapper.Map<List<EquipmentDto>>(equipmentList);
+        //public int Create(EquipmentDto equipmentServiceDto)
+        //{
+        //    //var equipment = _mapper.Map<Equipment>(equipmentServiceDto);
+        //    //equipment.CreatedByUserId = _userContextService.GetUserId;
+        //    //_dbContext.Equipments.Add(equipment);
+        //    //_dbContext.SaveChanges();
+        //    //return equipment.Id;
+        //    return 0;
+        //}
+        //public List<EquipmentDto> GetAll()
+        //{
+        //    var equipmentList = _dbContext.Equipments;
+        //    var equipmentDtoList = _mapper.Map<List<EquipmentDto>>(equipmentList);
 
-            return equipmentDtoList;
-        }
-        public EquipmentDto GetById(int id)
-        {
-            var equipments = _dbContext.Equipments.FirstOrDefault(f => f.Id == id);
+        //    return equipmentDtoList;
+        //}
+        //public EquipmentDto GetById(int id)
+        //{
+        //    var equipments = _dbContext.Equipments.First();
 
-            if (equipments is null)
-            {
-                throw new NotFoundException("Equipment not found");
-            }
-            return _mapper.Map<EquipmentDto>(equipments);
-        }
+        //    if (equipments is null)
+        //    {
+        //        throw new NotFoundException("Equipment not found");
+        //    }
+        //    return _mapper.Map<EquipmentDto>(equipments);
+        //}
 
-        public void Delete(int id)
-        {
-            _logger.LogError($"Restaurant with id = {id} DELETE action invoked");
-            ; var occurence = _dbContext.Equipments.FirstOrDefault(f => f.Id == id);
-            if (occurence is null)
-            {
-                throw new NotFoundException("Equipment not found");
-            }
-            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, occurence, new ResourcesOperationRequirement(ResourceOperation.Delete)).Result;
-            if (!authorizationResult.Succeeded)
-            {
-                throw new ForbidException();
-            }
-            _dbContext.Equipments.Remove(occurence);
-            _dbContext.SaveChanges();
-        }
+        //public void Delete(int id)
+        //{
+        //    _logger.LogError($"Restaurant with id = {id} DELETE action invoked");
+        //    ; var occurence = _dbContext.Equipments.First();
+        //    if (occurence is null)
+        //    {
+        //        throw new NotFoundException("Equipment not found");
+        //    }
+        //    var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, occurence, new ResourcesOperationRequirement(ResourceOperation.Delete)).Result;
+        //    if (!authorizationResult.Succeeded)
+        //    {
+        //        throw new ForbidException();
+        //    }
+        //    _dbContext.Equipments.Remove(occurence);
+        //    _dbContext.SaveChanges();
+        //}
 
-        public void Update(int id, UpdateEquipmentDto equipmentDto)
-        {
-            var equipment = _dbContext.Equipments.FirstOrDefault(f => f.Id == id);
-            if (equipment is null)
-            {
-                throw new NotFoundException("Equipment not found");
-            }
-            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, equipment, new ResourcesOperationRequirement(ResourceOperation.Update)).Result;
-            if (!authorizationResult.Succeeded)
-            {
-                throw new ForbidException();
-            }
-            //equipment.,Name = updateRestaurant.Name;
-            // equipment.Description = updateRestaurant.Description;
-            // equipment.HasDelivery = updateRestaurant.HasDelivery;
-            _dbContext.SaveChanges();
-        }
+        //public void Update(int id, UpdateEquipmentDto equipmentDto)
+        //{
+        //    var equipment = _dbContext.Equipments.First();
+        //    if (equipment is null)
+        //    {
+        //        throw new NotFoundException("Equipment not found");
+        //    }
+        //    var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, equipment, new ResourcesOperationRequirement(ResourceOperation.Update)).Result;
+        //    if (!authorizationResult.Succeeded)
+        //    {
+        //        throw new ForbidException();
+        //    }
+        //    //equipment.,Name = updateRestaurant.Name;
+        //    // equipment.Description = updateRestaurant.Description;
+        //    // equipment.HasDelivery = updateRestaurant.HasDelivery;
+        //    _dbContext.SaveChanges();
+        //}
     }
 }

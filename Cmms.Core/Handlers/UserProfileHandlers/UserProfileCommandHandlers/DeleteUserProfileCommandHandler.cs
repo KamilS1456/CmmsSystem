@@ -14,10 +14,10 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Handlers.UserProfileHandlers.UserProfileCommandHandlers
 {
-    class DeleteUserProfileCommandHandler : IRequestHandler<DeleteUserProfileCommand, OperationResult<UserProfile>>
+    class DeleteQuestCommandHandler : IRequestHandler<DeleteUserProfileCommand, OperationResult<UserProfile>>
     {
         private readonly CmmsDbContext _cmmsDbContext;
-        public DeleteUserProfileCommandHandler(CmmsDbContext cmmsDbContext)
+        public DeleteQuestCommandHandler(CmmsDbContext cmmsDbContext)
         {
             _cmmsDbContext = cmmsDbContext;
         }

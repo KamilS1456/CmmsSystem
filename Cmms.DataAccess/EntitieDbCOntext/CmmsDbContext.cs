@@ -1,4 +1,5 @@
 ﻿using Cmms.Domain.Entities;
+using Cmms.Domain.Entities.Quest;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

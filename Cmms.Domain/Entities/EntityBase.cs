@@ -5,10 +5,10 @@ namespace Cmms.Domain.Entities
 {
     public class EntityBase
     {
-        public int Id { get; set; }
-        public int? CreatedByUserId { get; set; }
+        public Guid Id { get; set; }
+        public Guid? CreatedByUserId { get; set; }
         public DateTime CreationDateTime { get; set; }
-        public int LastModifyByUserId { get; set; }
+        public Guid LastModifyByUserId { get; set; }
         public DateTime LastModifyDateTime { get; set; }
     }
 }
