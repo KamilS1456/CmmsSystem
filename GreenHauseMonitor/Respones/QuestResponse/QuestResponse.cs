@@ -1,7 +1,7 @@
-﻿using Cmms.Domain.Dictionary;
-using Cmms.Respones.UserProfileResponse;
+﻿using Cmms.DtoModels;
 using System;
-using static Cmms.Domain.Dictionary.Dictionary;
+using System.Collections.Generic;
+using static Cmms.Domain.Dictionary.QuestStateEnum;
 
 namespace Cmms.Respones.QuestResponse
 {
@@ -12,7 +12,10 @@ namespace Cmms.Respones.QuestResponse
         public string Description { get; set; }
         public DateTime DeadLineDataTime { get; set; }
         public int Priority { get; set; }
-        public QuestState QuestState { get; set; } = QuestState.New;
+        public QuestState QuestState { get; set; }
         public Guid QuestTypeId { get; set; }
+
+        IEnumerable<QuestToUserDto> QuestToUsers { get; set; }
+        IEnumerable<QuestToEquipmentDto> QuestToEquipments { get; set; }
     }
 }

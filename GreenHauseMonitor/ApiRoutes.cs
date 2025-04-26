@@ -19,6 +19,16 @@
             public const string IdRoute = "{id}";
         }
 
+        public static class Equipments
+        {
+            public const string IdRoute = "{id}";
+        }
+
+        public static class EquipmentSets
+        {
+            public const string IdRoute = "{id}";
+        }
+
         public static class Identity
         {
             public const string Login = "legin";

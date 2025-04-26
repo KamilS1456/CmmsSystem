@@ -1,64 +1,91 @@
-﻿using Cmms.Core.Models;
-using Cmms.Services;
+﻿using AutoMapper;
+using Cmms.Api.Filters;
+using Cmms.Core.Commands.EquipmentCommands;
+using Cmms.Core.Queries.EquipmentQueries;
+using Cmms.Filters;
+using Cmms.Queries.EquipmentQueries;
+using Cmms.Requests.Equipment;
+using Cmms.Respones.EquipmentResponse;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Cmms.Controllers
 {
-    [Route("api/equipment")]
+    [Route(ApiRoutes.BaseRoute)]
     [ApiController]
-   // [Authorize]
-    public class EquipmentController : ControllerBase
+    [Authorize]
+    public class EquipmentController : BaseController
     {
-        private readonly IEquipmentService _service;
-
-        public EquipmentController(IEquipmentService service)
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+        public EquipmentController(IMapper mapper, IMediator mediator)
         {
-            _service = service;
-        }
-
-        [HttpPost]
-        //[Authorize(Roles = "Admin,Manager")]
-        public async Task<ActionResult> CreateEquipment([FromBody] EquipmentDto equipmentDto)
-        {
-            var id = _service.Create(equipmentDto);
-            return Created($"/api/equipment/{id}", null);
+            _mapper = mapper;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Admin,Manager,User")]
-
-        public async Task<ActionResult<List<EquipmentDto>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var allEquipment = _service.GetAll();
-            return Ok(allEquipment);
+            var response = await _mediator.Send(new GetEquipmentListQuery());
+            var Equipments = _mapper.Map<List<EquipmentResponse>>(response.Payload);
+            return Ok(Equipments);
         }
 
-        [HttpGet("{id}")]
-        //[Authorize(Policy = "AtLeast18")]
-        public async Task<ActionResult<EquipmentDto>> Get([FromRoute] int id)
+        [HttpGet]
+        [Route(ApiRoutes.Equipments.IdRoute)]
+        [ValidateGuid("id")]
+        public async Task<IActionResult> GetEquipmentById(string id, CancellationToken cancellationToken)
         {
-            var equipment =  _service.GetById(id);
-            return Ok(equipment);
+            var query = new GetEquipmentByIdQuery(Guid.Parse(id));
+            var response = await _mediator.Send(query, cancellationToken);
 
+            if (response.IsError)
+                return HandleErrorResponse(response.ErrorList);
+
+            var equipmentResponse = _mapper.Map<EquipmentResponse>(response.Payload);
+            return Ok(equipmentResponse);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete([FromRoute] int id)
+        [HttpPost]
+        [ValidateModel]
+        public async Task<IActionResult> CreateEquipment([FromBody] EquipmentCreate EquipmentCreate)
         {
-            _service.Delete(id);
-            return NoContent();
-
+            var command = _mapper.Map<CreateEquipmentCommand>(EquipmentCreate);
+            command.CreatedByUserID = GetUserProfileIdClaimValue(HttpContext);
+            var result = await _mediator.Send(command);
+            var Equipment = _mapper.Map<EquipmentResponse>(result.Payload);
+            return CreatedAtAction(nameof(GetEquipmentById), new { id = result.Payload.Id }, EquipmentCreate);
         }
 
-        [HttpPut("{id}")]
-        //[AllowAnonymous] aby działął bez autoryzacji
-        public async Task<ActionResult> Update([FromRoute] int id, [FromBody] UpdateEquipmentDto updateEquipment)
+        [HttpPatch]
+        [Route(ApiRoutes.Equipments.IdRoute)]
+        [ValidateModel]
+        [ValidateGuid("id")]
+        public async Task<IActionResult> Update(string id, [FromBody] EquipmentUpdate EquipmentDto)
         {
-            _service.Update(id, updateEquipment);
-            return NoContent();
+            var command = _mapper.Map<UpdateEquipmentCommand>(EquipmentDto);
+            command.Id = Guid.Parse(id);
+            command.UpdateByUserID = GetUserProfileIdClaimValue(HttpContext);
+            var response = await _mediator.Send(command);
+
+            return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
+        }
+
+        [HttpDelete]
+        [Route(ApiRoutes.Equipments.IdRoute)]
+        [ValidateGuid("id")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var deleteCommand = new DeleteEquipmentCommand() { Id = Guid.Parse(id), DeletingByUserID = GetUserProfileIdClaimValue(HttpContext) };
+            var response = await _mediator.Send(deleteCommand);
+
+            return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
         }
     }
 }

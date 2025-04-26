@@ -1,8 +1,8 @@
-﻿using Cmms.Domain.Dictionary;
-using static Cmms.Domain.Dictionary.Dictionary;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Cmms.Filters;
+using System.Collections.Generic;
+using Cmms.DtoModels;
+using static Cmms.Domain.Dictionary.QuestStateEnum;
 
 namespace Cmms.Requests.Quest
 {
@@ -15,9 +15,12 @@ namespace Cmms.Requests.Quest
         public string Description { get; set; }
         public DateTime DeadLineDataTime { get; set; }
         public int Priority { get; set; }
-        public QuestState QuestState { get; set; } = QuestState.New;
+        public QuestState QuestState { get; set; }
 
         [Required]
         public Guid QuestTypeId { get; set; }
+
+        public IEnumerable<QuestToUserDto> QuestToUsers { get; set; }
+        public IEnumerable<QuestToEquipmentDto> QuestToEquipments { get; set; }
     }
 }

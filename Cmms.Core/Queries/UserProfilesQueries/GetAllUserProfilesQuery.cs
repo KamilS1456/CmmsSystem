@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Queries.UserProfilesQueries
 {
-    public class GetAllUserProfilesQuery : IRequest<OperationResult<IEnumerable<UserProfile>>>
-    {
-        public GetAllUserProfilesQuery()
-        {
-        }
-    }
+    public record GetAllUserProfilesQuery : IRequest<OperationResult<IEnumerable<UserProfile>>>;
+
 }

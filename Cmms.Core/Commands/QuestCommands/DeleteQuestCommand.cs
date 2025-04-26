@@ -13,5 +13,7 @@ namespace Cmms.Core.Commands.QuestCommands
     public class DeleteQuestCommand : IRequest<OperationResult<Quest>>
     {
         public Guid Id { get; set; }
+
+        public Guid DeletingByUserID { get; set; }
     }
 }

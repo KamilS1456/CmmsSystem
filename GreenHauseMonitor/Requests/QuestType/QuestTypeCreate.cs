@@ -1,8 +1,4 @@
-﻿using Cmms.Domain.Dictionary;
-using static Cmms.Domain.Dictionary.Dictionary;
-using System;
-using System.ComponentModel.DataAnnotations;
-using Cmms.Filters;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Cmms.Requests.QuestType
 {
@@ -15,5 +11,6 @@ namespace Cmms.Requests.QuestType
 
         [Required]
         public int DefaultPriority { get; set; }
+
     }
 }

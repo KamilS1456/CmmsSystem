@@ -59,6 +59,7 @@ namespace Cmms.Controllers
         public async Task<IActionResult> CreateQuestType([FromBody] QuestTypeCreate questTypeCreate)
         {
             var command = _mapper.Map<CreateQuestTypeCommand>(questTypeCreate);
+            command.CreatedByUserID = GetUserProfileIdClaimValue(HttpContext);
             var result = await _mediator.Send(command);
             var questType = _mapper.Map<QuestTypeResponse>(result.Payload);
             return CreatedAtAction(nameof(GetQuestTypeById), new { id = result.Payload.Id }, questTypeCreate);

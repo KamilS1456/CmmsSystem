@@ -1,5 +1,4 @@
-﻿using Cmms.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Cmms.DataAccess.EntitieDbCOntext;
 using Cmms.Core.Models;
 using Cmms.Domain.Entities.Quest;
@@ -20,7 +19,7 @@ namespace Cmms.Core.Handlers.QuestTypeHandlers.QuestTypeCommandHandlers
 
             try
             {
-                var questType = QuestType.CreateQuestType(request.Name, request.DefaultPriority);
+                var questType = QuestType.CreateQuestType(request.CreatedByUserID, request.Name, request.DefaultPriority);
 
                 _cmmsDbContext.QuestTypes.Add(questType);
                 await _cmmsDbContext.SaveChangesAsync(cancellationToken);

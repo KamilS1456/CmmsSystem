@@ -1,4 +1,5 @@
-﻿using static Cmms.Domain.Dictionary.Dictionary;
+﻿
+using static Cmms.Domain.Dictionary.UserInQuestResponsabilityEnum;
 
 namespace Cmms.Domain.Entities.Quest
 {
@@ -7,7 +8,24 @@ namespace Cmms.Domain.Entities.Quest
         public Guid Id { get; private set; }
         public Guid QuestId { get; private set; }
         public Guid UserId { get; private set; }
-        public UserInQuestResponsability userInQuestResponsability { get; private set; } = UserInQuestResponsability.Observer;
+        public UserInQuestResponsability UserInQuestResponsability { get; private set; } = UserInQuestResponsability.Observer;
 
+
+
+        public static QuestToUser CreateQuestToUser(Guid questId, Guid userId, UserInQuestResponsability userInQuestResponsability)
+        {
+            return new QuestToUser
+            {
+                QuestId = questId,
+                UserId = userId,
+                UserInQuestResponsability = userInQuestResponsability
+            };
+        }
+
+        public void UpdateQuestToUser(UserInQuestResponsability userInQuestResponsability)
+        {
+            UserInQuestResponsability = userInQuestResponsability;
+        }
     }
 }
+

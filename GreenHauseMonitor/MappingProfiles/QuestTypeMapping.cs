@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Cmms.Domain.Entities;
 using Cmms.Requests.QuestType;
 using Cmms.Respones.QuestTypeResponse;
 using Cmms.Core.Commands.QuestTypeCommand;
 using Cmms.Core.Commands.QuestCommands;
+using Cmms.Domain.Entities.Quest;
 
 namespace Cmms.MappingProfiles
 {

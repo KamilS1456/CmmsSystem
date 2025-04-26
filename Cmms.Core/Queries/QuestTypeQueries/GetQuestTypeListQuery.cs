@@ -1,5 +1,4 @@
 ﻿using Cmms.Core.Models;
-using Cmms.Domain.Entities;
 using Cmms.Domain.Entities.Quest;
 using MediatR;
 

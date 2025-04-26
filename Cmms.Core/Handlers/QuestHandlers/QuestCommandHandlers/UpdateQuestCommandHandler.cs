@@ -1,4 +1,5 @@
-﻿using Cmms.Core.Commands.QuestCommands;
+﻿using AutoMapper;
+using Cmms.Core.Commands.QuestCommands;
 using Cmms.Core.Enums;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
@@ -12,41 +13,44 @@ namespace Cmms.Core.Handlers.QuestHandlers.QuestCommandHandlers
     public class UpdateQuestCommandHandler : IRequestHandler<UpdateQuestCommand, OperationResult<Quest>>
     {
         private readonly CmmsDbContext _cmmsDbContext; 
+        private readonly IMapper _mapper;
 
-        public UpdateQuestCommandHandler(CmmsDbContext cmmsDbContext)
+        OperationResult<Quest> _result = new ();
+
+        public UpdateQuestCommandHandler(CmmsDbContext cmmsDbContext, IMapper mapper)
         {
             _cmmsDbContext = cmmsDbContext;
+            _mapper = mapper;
         }
 
         public async Task<OperationResult<Quest>> Handle(UpdateQuestCommand request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<Quest>();
-
             try
             {
-                var quest = await _cmmsDbContext.Quests.FirstOrDefaultAsync(x => x.Id == request.Id);
+                var quest = await _cmmsDbContext.Quests.Include(i => i.QuestToEquipmentList).Include(i => i.QuestToUserList).FirstOrDefaultAsync(x => x.Id == request.Id);
 
                 if (quest is null)
                 {
-                    result.AddError(ErrorCode.NotFound, string.Format("No Quest found for ID {0}", request.Id));
-                    return result;
+                    _result.AddError(ErrorCode.NotFound, string.Format("No Quest found for ID {0}", request.Id));
+                    return _result;
                 }
 
-                quest.UpdateQuest(Guid.NewGuid(), request.Name, request.Description, request.QuestTypeId,
-                    request.Priority, request.QuestState, request.DeadLineDataTime, null, null);
+                quest.UpdateQuest(request.UpdateByUserID, request.Name, request.Description, request.QuestTypeId,
+                    request.Priority, request.QuestState, request.DeadLineDataTime, 
+                    _mapper.Map<IEnumerable<QuestToUser>>(request.QuestToUsers), _mapper.Map<IEnumerable<QuestToEquipment>>(request.QuestToEquipments));
 
                 _cmmsDbContext.Quests.Update(quest);
                 await _cmmsDbContext.SaveChangesAsync(cancellationToken);
 
-                result.Payload = quest;
+                _result.Payload = quest;
 
-                return result;
+                return _result;
             } catch (QuestNotValidException ex){
-                ex.ValidationErrors.ForEach(e => result.AddError(ErrorCode.ValidationError, e));
+                ex.ValidationErrors.ForEach(e => _result.AddError(ErrorCode.ValidationError, e));
             } catch (Exception e){
-                result.AddUnknownError(e.Message);
+                _result.AddUnknownError(e.Message);
             }
-            return result;
-        }
+            return _result;
+        }        
     }
 }

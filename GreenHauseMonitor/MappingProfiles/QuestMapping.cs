@@ -4,6 +4,8 @@ using Cmms.Requests.Quest;
 using Cmms.Domain.Entities.Quest;
 using Cmms.Respones.QuestResponse;
 using Cmms.Core.Commands.QuestCommands;
+using Cmms.DtoModels;
+using System.Collections.Generic;
 
 namespace Cmms.MappingProfiles
 {
@@ -14,6 +16,8 @@ namespace Cmms.MappingProfiles
             CreateMap<QuestCreate, CreateQuestCommand>();
             CreateMap<Quest, QuestResponse>();
             CreateMap<QuestUpdate, UpdateQuestCommand>();
+            CreateMap<QuestToUser, QuestToUserDto>().ReverseMap();
+            CreateMap<QuestToEquipment, QuestToEquipmentDto>().ReverseMap();
         }
     }
 }

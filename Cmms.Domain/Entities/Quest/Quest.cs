@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using static Cmms.Domain.Dictionary.Dictionary;
+﻿using Cmms.Domain.Exceptions;
+using Cmms.Domain.Validators.QuestValidators;
+using static Cmms.Domain.Dictionary.QuestStateEnum;
 
 namespace Cmms.Domain.Entities.Quest
 {
@@ -21,14 +20,14 @@ namespace Cmms.Domain.Entities.Quest
 
         // Factory method
         public static Quest CreateQuest(Guid userProfileID, string name, string description, Guid questTypeID,
-            int priority, QuestState questState, DateTime deadLineDataTime, 
-            List<QuestToUser> questToUsers, List<QuestToEquipment> QuestToEquipmentList)
+            int priority, QuestState questState, DateTime deadLineDataTime
+            , IEnumerable<QuestToUser> usersForQuest, IEnumerable<QuestToEquipment> equipmentsForQuest)
         {
-            //var validator = new QuestValidator();
-            return new Quest
+            var validator = new QuestValidator();
+            var quest =  new Quest
             {
-               // LastModifyByUserId = userProfileID,
-                //CreatedByUserId = userProfileID,
+                LastModifyByUserId = userProfileID,
+                CreatedByUserId = userProfileID,
                 CreationDateTime = DateTime.UtcNow,
                 LastModifyDateTime = DateTime.UtcNow,
                 Name = name,
@@ -36,18 +35,32 @@ namespace Cmms.Domain.Entities.Quest
                 QuestTypeId = questTypeID,
                 Priority = priority,
                 QuestState = questState,
-                DeadLineDataTime = deadLineDataTime
+                DeadLineDataTime = deadLineDataTime,
             };
-            //List<QuestToUser> questToUsers, List< QuestToEquipment > QuestToEquipmentList todoo
+            quest.UpdatedQuestToUserList(usersForQuest);
+            quest.UpdatedQuestToEquipmentList(equipmentsForQuest);
+
+            var validationResult = validator.Validate(quest);         
+
+            if (validationResult.IsValid) {
+                return quest;
+            }
+
+            var exception = new QuestNotValidException("The quest is not valid");
+            foreach (var error in validationResult.Errors)
+            {
+                exception.ValidationErrors.Add(error.ErrorMessage);
+            }
+            throw exception;
+
         }
 
         //public methods
 
         public void UpdateQuest(Guid userProfileID, string name, string description, Guid questTypeID,
-            int priority, QuestState questState, DateTime deadLineDataTime,
-            List<QuestToUser> questToUsers, List<QuestToEquipment> QuestToEquipmentList)
+            int priority, QuestState questState, DateTime deadLineDataTime, IEnumerable<QuestToUser> questToUser, IEnumerable<QuestToEquipment> questToEquipment)
         {
-            //LastModifyByUserId = userProfileID;
+            LastModifyByUserId = userProfileID;
             LastModifyDateTime = DateTime.UtcNow;
             Name = name;
             Description = description;
@@ -55,10 +68,44 @@ namespace Cmms.Domain.Entities.Quest
             Priority = priority;
             QuestState = questState;
             DeadLineDataTime = deadLineDataTime;
+
+            UpdatedQuestToUserList(questToUser);
+            UpdatedQuestToEquipmentList(questToEquipment);
+
+            var validator = new QuestValidator();
+            var validationResult = validator.Validate(this);
+
+            if (!validationResult.IsValid)
+            {
+                var exception = new QuestNotValidException("The quest is not valid");
+                foreach (var error in validationResult.Errors)
+                {
+                    exception.ValidationErrors.Add(error.ErrorMessage);
+                }
+                throw exception;
+            }
+
+            
         }
 
+        void UpdatedQuestToUserList(IEnumerable<QuestToUser> questToUser)
+        {
+            var updatedQuestToUserList = new List<QuestToUser>();
+            foreach (var qtu in questToUser)
+            {                
+               updatedQuestToUserList.Add(QuestToUser.CreateQuestToUser(Id, qtu.UserId, qtu.UserInQuestResponsability));                
+            }
+            QuestToUserList = updatedQuestToUserList;
+        }
 
-
-
+        void UpdatedQuestToEquipmentList(IEnumerable<QuestToEquipment> questToEquipment)
+        {
+            var updatedQuestToEquipmentList = new List<QuestToEquipment>();
+            foreach (var qte in questToEquipment)
+            {
+                updatedQuestToEquipmentList.Add(QuestToEquipment.CreateQuestToEquipment(Id, qte.EquipmentId));
+            }
+            QuestToEquipmentList = updatedQuestToEquipmentList;
+        }
     }
 }

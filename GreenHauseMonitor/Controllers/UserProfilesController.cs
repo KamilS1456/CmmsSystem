@@ -45,7 +45,7 @@ namespace Cmms.Controllers
         [ValidateGuid("id")]
         public async Task<IActionResult> GetUserProfileById(string id, CancellationToken cancellationToken)
         {
-            var query = new GetUserProfileByIdQuery { UserProfileId = Guid.Parse(id) };
+            var query = new GetUserProfileByIdQuery(Guid.Parse(id));
             var response = await _mediator.Send(query, cancellationToken);
 
             if (response.IsError)

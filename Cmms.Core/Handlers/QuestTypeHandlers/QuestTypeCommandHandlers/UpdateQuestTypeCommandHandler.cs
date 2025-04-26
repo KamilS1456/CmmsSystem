@@ -2,7 +2,7 @@
 using Cmms.Core.Enums;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
-using Cmms.Domain.Entities;
+using Cmms.Domain.Entities.Quest;
 using Cmms.Domain.Exceptions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +40,7 @@ namespace Cmms.Core.Handlers.QuestTypeHandlers.QuestTypeCommandHandlers
                 result.Payload = questType;
 
                 return result;
-            } catch (QuestNotValidException ex){
+            } catch (QuestTypeNotValidException ex){
                 ex.ValidationErrors.ForEach(e => result.AddError(ErrorCode.ValidationError, e));
             } catch (Exception e){
                 result.AddUnknownError(e.Message);

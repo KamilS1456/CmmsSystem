@@ -2,7 +2,6 @@
 using Cmms.Core.Enums;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
-using Cmms.Domain.Entities;
 using Cmms.Domain.Entities.Quest;
 using Cmms.Domain.Exceptions;
 using MediatR;

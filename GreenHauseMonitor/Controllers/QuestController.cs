@@ -12,12 +12,14 @@ using Cmms.Respones.QuestResponse;
 using Cmms.Api.Filters;
 using Cmms.Requests.Quest;
 using Cmms.Core.Commands.QuestCommands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cmms.Controllers
 {
 
     [Route(ApiRoutes.BaseRoute)]
     [ApiController]
+    [Authorize]
     public class QuestController : BaseController
     {
         private readonly IMediator _mediator;
@@ -56,6 +58,7 @@ namespace Cmms.Controllers
         public async Task<IActionResult> CreateQuest([FromBody] QuestCreate questCreate)
         {
             var command = _mapper.Map<CreateQuestCommand>(questCreate);
+            command.CreatedByUserID = GetUserProfileIdClaimValue(HttpContext);
             var result = await _mediator.Send(command);
             var quest = _mapper.Map<QuestResponse>(result.Payload);
             return CreatedAtAction(nameof(GetQuestById), new { id = result.Payload.Id }, questCreate);
@@ -69,24 +72,21 @@ namespace Cmms.Controllers
         {
             var command = _mapper.Map<UpdateQuestCommand>(questDto);
             command.Id = Guid.Parse(id);
+            command.UpdateByUserID = GetUserProfileIdClaimValue(HttpContext);
             var response = await _mediator.Send(command);
 
             return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
         }
-
 
         [HttpDelete]
         [Route(ApiRoutes.Quests.IdRoute)]
         [ValidateGuid("id")]
         public async Task<IActionResult> Delete(string id)
         {
-            var deleteCommand = new DeleteQuestCommand() { Id = Guid.Parse(id) };
+            var deleteCommand = new DeleteQuestCommand() { Id = Guid.Parse(id), DeletingByUserID = GetUserProfileIdClaimValue(HttpContext) };
             var response = await _mediator.Send(deleteCommand);
 
             return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
-
         }
-
-        
     }
 }

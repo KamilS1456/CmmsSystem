@@ -9,9 +9,5 @@ using System.Threading.Tasks;
 
 namespace Cmms.Core.Queries.UserProfilesQueries
 {
-    public class GetUserProfileByIdQuery : IRequest<OperationResult<UserProfile>>
-    { 
-        public Guid UserProfileId { get; set; }
-    }
-
+    public record GetUserProfileByIdQuery(Guid UserProfileId) : IRequest<OperationResult<UserProfile>>;
 }

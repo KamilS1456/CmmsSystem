@@ -1,8 +1,4 @@
 
-using Cmms.Services;
-using Cmms;
-using FluentValidation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -23,7 +19,6 @@ using Cmms.Core;
 using Cmms.DataAccess.EntitieDbCOntext;
 using Cmms.Filters;
 using Cmms.Core.Options;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using Cmms.Core.Services;
 
 
@@ -128,7 +123,6 @@ builder.Services.AddScoped<IdentityService>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
 builder.Services.AddScoped<IPasswordHasher<IdentityUser>, PasswordHasher<IdentityUser>>();
 builder.Services.AddScoped<RequestTimerMiddleware>();
-builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(optons =>
 {

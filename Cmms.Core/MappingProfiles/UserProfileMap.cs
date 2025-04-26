@@ -13,7 +13,6 @@ namespace Cmms.Core.MappingProfiles
     {
         public UserProfileMap()
         {
-            CreateMap<CreateUserProfileCommand, UserProfileBasicInfo>();
         }
     }
 }

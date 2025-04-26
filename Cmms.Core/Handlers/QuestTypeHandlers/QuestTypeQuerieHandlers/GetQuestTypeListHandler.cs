@@ -1,7 +1,6 @@
 ﻿//using Cmms.Core.EntitieDbCOntext;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
-using Cmms.Domain.Entities;
 using Cmms.Domain.Entities.Quest;
 using Cmms.Queries.QuestQueries;
 using Cmms.Queries.QuestTypeQueries;

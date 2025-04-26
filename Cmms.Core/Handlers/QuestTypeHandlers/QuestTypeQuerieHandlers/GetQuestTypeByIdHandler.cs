@@ -9,7 +9,6 @@ using Cmms.Domain.Entities.Quest;
 using Cmms.Core.Models;
 using Cmms.DataAccess.EntitieDbCOntext;
 using Cmms.Core.Enums;
-using Cmms.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Cmms.Core.Queries.QuestTypeQueries;
 

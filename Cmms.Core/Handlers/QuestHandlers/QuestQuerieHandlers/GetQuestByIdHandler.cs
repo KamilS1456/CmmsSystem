@@ -14,10 +14,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cmms.Core.Handlers.QuestHandlers.QuestQuerieHandlers
 {
-    public class GetQuestTypeByIdHandler : IRequestHandler<GetQuestByIdQuery, OperationResult<Quest>>
+    public class GetQuestByIdHandler : IRequestHandler<GetQuestByIdQuery, OperationResult<Quest>>
     {
         private readonly CmmsDbContext _cmmsDbContext;
-        public GetQuestTypeByIdHandler(CmmsDbContext cmmsDbContext)
+        public GetQuestByIdHandler(CmmsDbContext cmmsDbContext)
         {
             _cmmsDbContext = cmmsDbContext;
 
@@ -25,7 +25,7 @@ namespace Cmms.Core.Handlers.QuestHandlers.QuestQuerieHandlers
         public async Task<OperationResult<Quest>> Handle(GetQuestByIdQuery request, CancellationToken cancellationToken)
         {
             var operationResult = new OperationResult<Quest>();
-            operationResult.Payload = await _cmmsDbContext.Quests.FirstOrDefaultAsync(f => f.Id == request.Id);
+            operationResult.Payload = await _cmmsDbContext.Quests.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken);
 
             if (operationResult.Payload is null)
             {

@@ -1,6 +1,6 @@
 ﻿using Cmms.Domain.Dictionary;
-using static Cmms.Domain.Dictionary.Dictionary;
 using System;
+using static Cmms.Domain.Dictionary.QuestStateEnum;
 
 namespace Cmms.Respones.QuestResponse
 {
