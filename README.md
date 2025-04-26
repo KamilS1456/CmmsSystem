@@ -1,5 +1,7 @@
-console commend
+In progress
 
-add-migration nazwa migracji
+Aplikacja dla pracownikow fabryk w dziale utrzymania ruchu.
 
-update-database 
+Stack: C#, ASP.NET, CQRS, MSSQL, EntityFramework, Dependency Injection, MediatR, FluentValidation, AutoMapper, Swagger, NLog
+
+Website With React, TypeScript/Javascript (IN Progress)
