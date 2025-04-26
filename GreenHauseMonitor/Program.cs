@@ -1,184 +1,19 @@
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
-using FluentValidation.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
-using System.Reflection;
-using Cmms.Middleware;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Cmms.Core;
-using Cmms.DataAccess.EntitieDbCOntext;
-using Cmms.Filters;
-using Cmms.Core.Options;
-using Cmms.Core.Services;
+using Cmms.Registers;
 
 
 var builder = WebApplication.CreateBuilder();
 
-// NLog: Setup Nlog for Dependency injection
-builder.Logging.ClearProviders();
-builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-builder.Host.UseNLog();
 
-var authenticationSetting = new AuthenticationSettings();
-builder.Configuration.Bind(nameof(AuthenticationSettings), authenticationSetting);
+builder.RegisterServices(typeof(Program));
 
-var authenticationSection = builder.Configuration.GetSection(nameof(AuthenticationSettings));
-builder.Services.Configure<AuthenticationSettings>(authenticationSection);
-
-//var authenticationSetting = new AuthenticationSettings();
-//builder.Configuration.GetSection(nameof(AuthenticationSettings)).Bind(authenticationSetting);
-//builder.Services.Configure<AuthenticationSettings>(authenticationSetting);
-//builder.Services.AddSingleton(authenticationSetting); zakomentowalem dzisiaj
-builder.Services.AddAuthentication(option =>
-{
-    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;// "Bearer";
-    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;// "Bearer";
-    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;//"Bearer";
-}).AddJwtBearer(cfg =>
-{
-#if DEBUG
-    cfg.RequireHttpsMetadata = false;
-#endif
-    cfg.SaveToken = true;
-    cfg.TokenValidationParameters = new TokenValidationParameters
-    {
-        //ValidateActor = false,
-        ValidIssuer = authenticationSetting.JwtIssuer,
-        ValidAudiences = authenticationSetting.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authenticationSetting.JwtKey)),
-        ValidateAudience = true,
-        ValidateIssuer = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        RequireExpirationTime = false
-    };
-    cfg.Audience = authenticationSetting.Audience[0];
-    cfg.ClaimsIssuer = authenticationSetting.JwtIssuer;
-
-});
-builder.Services.AddControllersWithViews(options =>
-{
-    options.Filters.Add(typeof(CmmsExceptionHandler));
-});
-builder.Services.AddControllers();
-
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cmms", Version = "v1" });
-
-    OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Description = "Jwt Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        Reference = new OpenApiReference
-        {
-            Type = ReferenceType.SecurityScheme,
-            Id = JwtBearerDefaults.AuthenticationScheme
-        }
-    };
-    c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        { securityScheme, new string[] { } }
-    });
-});
-// services.AddControllers().AddFluentValidation();//obselite (stare)
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddFluentValidationClientsideAdapters();
-
-builder.Services.AddDbContext<CmmsDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext")));
-builder.Services.AddIdentityCore<IdentityUser>(options =>
-{
-    options.Password.RequiredLength = 3;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-}).AddEntityFrameworkStores<CmmsDbContext>();
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CmmsCoreMadiatorEntryPoint> ());
-
-//builder.Services.AddScoped<CmmSSeeder>();
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddScoped<IdentityService>();
-//builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllUserProfiles));
-//builder.Services.AddMediatR(typeof(GetAllUserProfiles));
-//builder.Services.AddScoped<IEquipmentService, EquipmentService>();
-//builder.Services.AddScoped<IEquipmentSetService, EquipmentSetService>();
-//builder.Services.AddScoped<IOccurrenceService, OccurrenceService>();
-builder.Services.AddScoped<ErrorHandlingMiddleware>();
-builder.Services.AddScoped<IPasswordHasher<IdentityUser>, PasswordHasher<IdentityUser>>();
-builder.Services.AddScoped<RequestTimerMiddleware>();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddCors(optons =>
-{
-    optons.AddPolicy("FrontEndClient", policybuilder =>
-        policybuilder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin()//WithOrigins(builder.Configuration["AllowedOrgins"], builder.Configuration["AllowedOrginsWeb"])//todoo
-    );
-});
-
-//configure
 var app = builder.Build();
-var scope = app.Services.CreateScope();
-//var seeder = scope.ServiceProvider.GetRequiredService<CmmSSeeder>();
-app.UseResponseCaching();
-app.UseStaticFiles();
-app.UseCors("FrontEndClient");
-//seeder.Seed();
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GreenHauseMonitor v1"));
-}
-app.UseMiddleware<ErrorHandlingMiddleware>();
-app.UseMiddleware<RequestTimerMiddleware>();
-app.UseAuthentication();
-app.UseHttpsRedirection();
 
-app.UseRouting();
-
-app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.RegisterPipelineComponents(typeof(Program));
 
 app.Run();
-
-
-//namespace GreenHauseMonitor
-//{
-//    public class Program
-//    {
-
-//        public static void Main(string[] args)
-//        {
-//            CreateHostBuilder(args).Build().Run();
-//        }
-
-//        public static IHostBuilder CreateHostBuilder(string[] args) =>
-//            Host.CreateDefaultBuilder(args)
-//                .ConfigureWebHostDefaults(webBuilder =>
-//                {
-//                    webBuilder.UseStartup<Startup>();
-//                })
-//                .UseNLog();
-//    }
-//}
 
 //Lubie placki
