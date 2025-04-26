@@ -15,11 +15,13 @@ using Cmms.Requests.UserProfileRequests;
 using Cmms.Respones.Common;
 using Cmms.Api.Filters;
 using Cmms.Filters;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cmms.Controllers
 {
     [Route(ApiRoutes.BaseRoute)]
     [ApiController]
+    [Authorize]
     public class UserProfilesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -37,7 +39,6 @@ namespace Cmms.Controllers
             var profiles = _mapper.Map<List<UserProfileResponse>>(response.Payload);
             return Ok(profiles);
         }
-
         
         [HttpGet]
         [Route(ApiRoutes.UserProfiles.IdRoute)]
@@ -54,17 +55,6 @@ namespace Cmms.Controllers
             return Ok(userProfile);
         }
 
-        [HttpPost]
-        [ValidateModel]
-        public async Task<IActionResult> CreateUserProfile([FromBody] UserProfileCreate userProfile)
-        {
-            var command = _mapper.Map<CreateUserProfileCommand>(userProfile);
-            var result = await _mediator.Send(command);
-            var userProfileResponse = _mapper.Map<UserProfileResponse>(result.Payload);
-            return CreatedAtAction(nameof(GetUserProfileById), new { id = result.Payload.UserProfileId}, userProfile);
-        }
-
-
         [HttpPatch]
         [Route(ApiRoutes.UserProfiles.IdRoute)]
         [ValidateModel]
@@ -77,18 +67,5 @@ namespace Cmms.Controllers
 
             return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
         }
-
-        [HttpDelete]
-        [Route(ApiRoutes.UserProfiles.IdRoute)]
-        [ValidateGuid("id")]
-        public async Task<IActionResult> DeleteUserProfile(string id)
-        {
-            var deleteCommand = new DeleteUserProfileCommand() {UserProfileId = Guid.Parse(id) };
-            var response = await _mediator.Send(deleteCommand);
-
-            return response.IsError ? HandleErrorResponse(response.ErrorList) : NoContent();
-        }
-
-
     }
 }

@@ -22,6 +22,9 @@ using Microsoft.EntityFrameworkCore;
 using Cmms.Core;
 using Cmms.DataAccess.EntitieDbCOntext;
 using Cmms.Filters;
+using Cmms.Core.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Cmms.Core.Services;
 
 
 var builder = WebApplication.CreateBuilder();
@@ -31,20 +34,16 @@ builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
 builder.Host.UseNLog();
 
-//configure services
-//builder.Services.AddIdentity<User, Role>(options =>
-//{
-//    options.Password.RequiredLength = 3;
-//    //options.Password.RequireNonAlphanumeric = true;
-//    //options.Password.RequireDigit = true;
-//    //options.Password.RequireLowercase = true;
-//    //options.Password.RequireUppercase = true;
-//});//.add. AddEntityFrameworkStores<AuthCmmsDbContext>()
-////.AddDefaultTopkenProviders();
-
 var authenticationSetting = new AuthenticationSettings();
-builder.Configuration.GetSection("Authentication").Bind(authenticationSetting);
-builder.Services.AddSingleton(authenticationSetting);
+builder.Configuration.Bind(nameof(AuthenticationSettings), authenticationSetting);
+
+var authenticationSection = builder.Configuration.GetSection(nameof(AuthenticationSettings));
+builder.Services.Configure<AuthenticationSettings>(authenticationSection);
+
+//var authenticationSetting = new AuthenticationSettings();
+//builder.Configuration.GetSection(nameof(AuthenticationSettings)).Bind(authenticationSetting);
+//builder.Services.Configure<AuthenticationSettings>(authenticationSetting);
+//builder.Services.AddSingleton(authenticationSetting); zakomentowalem dzisiaj
 builder.Services.AddAuthentication(option =>
 {
     option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;// "Bearer";
@@ -52,20 +51,24 @@ builder.Services.AddAuthentication(option =>
     option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;//"Bearer";
 }).AddJwtBearer(cfg =>
 {
+#if DEBUG
     cfg.RequireHttpsMetadata = false;
+#endif
     cfg.SaveToken = true;
-    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    cfg.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateActor = false,
+        //ValidateActor = false,
         ValidIssuer = authenticationSetting.JwtIssuer,
-        ValidAudience = authenticationSetting.JwtIssuer,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSetting.JwtKey)),
+        ValidAudiences = authenticationSetting.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(authenticationSetting.JwtKey)),
         ValidateAudience = true,
         ValidateIssuer = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        RequireExpirationTime = true
+        RequireExpirationTime = false
     };
+    cfg.Audience = authenticationSetting.Audience[0];
+    cfg.ClaimsIssuer = authenticationSetting.JwtIssuer;
 
 });
 builder.Services.AddControllersWithViews(options =>
@@ -73,9 +76,30 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(typeof(CmmsExceptionHandler));
 });
 builder.Services.AddControllers();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cmms", Version = "v1" });
+
+    OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = "Jwt Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Reference = new OpenApiReference
+        {
+            Type = ReferenceType.SecurityScheme,
+            Id = JwtBearerDefaults.AuthenticationScheme
+        }
+    };
+    c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { securityScheme, new string[] { } }
+    });
 });
 // services.AddControllers().AddFluentValidation();//obselite (stare)
 builder.Services.AddFluentValidationAutoValidation();
@@ -83,10 +107,19 @@ builder.Services.AddFluentValidationClientsideAdapters();
 
 builder.Services.AddDbContext<CmmsDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext")));
+builder.Services.AddIdentityCore<IdentityUser>(options =>
+{
+    options.Password.RequiredLength = 3;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+}).AddEntityFrameworkStores<CmmsDbContext>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CmmsCoreMadiatorEntryPoint> ());
 
 //builder.Services.AddScoped<CmmSSeeder>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IdentityService>();
 //builder.Services.AddAutoMapper(typeof(Program), typeof(GetAllUserProfiles));
 //builder.Services.AddMediatR(typeof(GetAllUserProfiles));
 //builder.Services.AddScoped<IEquipmentService, EquipmentService>();

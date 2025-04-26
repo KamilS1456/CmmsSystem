@@ -1,16 +1,16 @@
-﻿using Cmms.Core.Models;
-using Cmms.Domain.Entities;
-using MediatR;
+﻿using System;
 
-namespace Cmms.Core.Commands.UserProfileCommands
+namespace Cmms.Respones.IdentityResponse
 {
-    public class CreateUserProfileCommand : IRequest<OperationResult<UserProfile>>
+    public class IdentityUserProfile
     {
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string Phone { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string CurrentCity { get; set; }
+        public string Token { get; set; }
     }
 }

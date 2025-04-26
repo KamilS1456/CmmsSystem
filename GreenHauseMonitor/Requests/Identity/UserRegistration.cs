@@ -1,10 +1,18 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cmms.Requests.UserProfileRequests
+namespace Cmms.Requests.Identity
 {
-    public class UserProfileCreate
+    public class UserRegistration
     {
+        [Required]
+        [EmailAddress]
+        public string UserName { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
@@ -15,9 +23,6 @@ namespace Cmms.Requests.UserProfileRequests
         [MaxLength(30)]
         public string LastName { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public string EmailAddress { get; set; }
         public string Phone { get; set; }
 
         [Required]

@@ -10,7 +10,6 @@ namespace Cmms.MappingProfiles
     {
         public UserProfileMapping()
         {
-            CreateMap<UserProfileCreate, CreateUserProfileCommand>();
             CreateMap<UserProfile, UserProfileResponse>();
             CreateMap<UserProfileBasicInfo, UserProfileBasicInfoResponse>();
             CreateMap<UserProfileUpdate, UpdateUserProfileCommand>();
