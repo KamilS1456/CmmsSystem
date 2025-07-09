@@ -2880,9 +2880,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kamil\\source\\repos\\Cmms\\GreenHauseMonitor\\Cmms.csproj",
-      "projectName": "Cmms",
-      "projectPath": "C:\\Users\\kamil\\source\\repos\\Cmms\\GreenHauseMonitor\\Cmms.csproj",
+      "projectUniqueName": "C:\\Users\\kamil\\source\\repos\\Cmms\\GreenHauseMonitor\\Cmms.Api.csproj",
+      "projectName": "Cmms.Api",
+      "projectPath": "C:\\Users\\kamil\\source\\repos\\Cmms\\GreenHauseMonitor\\Cmms.Api.csproj",
       "packagesPath": "C:\\Users\\kamil\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\kamil\\source\\repos\\Cmms\\GreenHauseMonitor\\obj\\",
       "projectStyle": "PackageReference",
