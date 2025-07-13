@@ -1,5 +1,4 @@
 import './App.css'
-import QuestTypeTable from './components/QuestType/QuestTable'
 import Header from './components/Header/Header'
 import MenuNavigation from './components/Menu/MenuNavigation'
 import { Layout } from 'antd'
@@ -8,65 +7,26 @@ import Footer from './components/Footer/Footer'
 import { Content } from 'antd/es/layout/layout'
 import MainTabContent from './components/MainTabContentComponents/MainTabContent'
 import { useState } from 'react'
+import { getTabByKey } from './components/MainTabContentComponents/TabsProvider'
+import { ITabsItems } from './components/MainTabContentComponents/ITabsItems'
 
 function App() {
 
-    let [tabsItems, setTabsItems] = useState<Array<any>>([
-    ]);
+    let [tabsItems, setTabsItems] = useState<Array<ITabsItems>>([]);
 
     let [focusTab, setFocusTab] = useState<string>();
 
     function addTabByKey(key: string) {
-        setFocusTab(key);
+       
         if (!tabsItems.some(f => f.key === key)) {
             setTabsItems(prevItems => [...prevItems, getTabByKey(key)])
-        }         
+        } 
+        setFocusTab(key);
     };
 
     function removeTabByKey(key: string) {
         setTabsItems(tabsItems.filter(f => f.key !== key));            
     };
-
-    function getTabByKey(key: string): any {
-        switch (key) {
-            case 'QuestGridKey': {
-                return (
-                    { tab: 'Zadanie', key: key }
-                );
-                break;
-            }
-            case 'QuestTypeGridKey': {
-                return (
-                    { tab: 'Typ zadania', key: key }
-                );
-                break;
-            }
-            case 'EquipmentGridKey': {
-                return (
-                    { tab: 'Urz¹dzenia', key: key }
-                );
-                break;
-            }
-            case 'EquipmentSetGridKey': {
-                return (
-                    { tab: 'Grupy urz¹dzeñ', key: key }
-                );
-                break;
-            }
-            case 'UserGridKey': {
-                return (
-                    { tab: 'U¿ytkownicy', key: key }
-                );
-                break;
-            }
-            default: {
-                return (
-                    { tab: key, key: key }
-                );
-                break;
-            }
-        }
-    }
 
   return (
       <>

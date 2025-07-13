@@ -1,59 +1,55 @@
-import { Menu } from 'antd';
 import { Tabs } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
-import QuestTable from '../Quest/QuestTable';
-import QuestTypeTable from '../QuestType/QuestTypeTable';
+import { ITabsItems } from './ITabsItems';
+import { getTabPaneComponentByKey } from './TabsProvider';
+import type { DragEndEvent } from '@dnd-kit/core';
+import { closestCenter, DndContext, PointerSensor, useSensor } from '@dnd-kit/core';
+import {
+    arrayMove,
+    horizontalListSortingStrategy,
+    SortableContext,
+    useSortable,
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import type { TabsProps } from 'antd';
+import React from 'react';
 
 const MainTabContent = (props) => {
-    let [tabsItems, setTabsItems] = useState<Array<any>>(props.tabsItems);
+    let [tabsItems, setTabsItems] = useState<Array<ITabsItems>>(props.tabsItems);
 
-    const [activeKey, setActiveKey] = useState();
+    const [activeKey, setActiveKey] = useState<string>(props.focusTab);
+
+    const sensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } });
+
+    interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
+        'data-node-key': string;
+    }
+
+    const DraggableTabNode: React.FC<Readonly<DraggableTabPaneProps>> = ({ className, ...props }) => {
+        const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+            id: props['data-node-key'],
+        });
+
+        const style: React.CSSProperties = {
+            ...props.style,
+            transform: CSS.Translate.toString(transform),
+            transition,
+            cursor: 'move',
+        };
+
+        return React.cloneElement(props.children as React.ReactElement<any>, {
+            ref: setNodeRef,
+            style,
+            ...attributes,
+            ...listeners,
+        });
+    };
 
     useEffect(() => {
         setTabsItems(props.tabsItems);
     }, [props.tabsItems]);
 
-    function getTabPaneComponentByKey(key: string): any {
-        switch (key) {
-            case 'QuestGridKey': {
-                return (
-                    <QuestTable/>
-                );
-                break;
-            }
-            case 'QuestTypeGridKey': {
-                return (
-                    <QuestTypeTable />
-                );
-                break;
-            }
-            case 'EquipmentGridKey': {
-                return (
-                    { tab: 'Urz¹dzenia', key: key }
-                );
-                break;
-            }
-            case 'EquipmentSetGridKey': {
-                return (
-                    { tab: 'Grupy urz¹dzeñ', key: key }
-                );
-                break;
-            }
-            case 'UserGridKey': {
-                return (
-                    { tab: 'U¿ytkownicy', key: key }
-                );
-                break;
-            }
-            default: {
-                return (
-                    { tab: key, key: key }
-                );
-                break;
-            }
-        }
-    }
+
 
     const remove = (targetKey: TargetKey) => {
         const targetIndex = tabsItems.findIndex((pane) => pane.key === targetKey);
@@ -61,11 +57,11 @@ const MainTabContent = (props) => {
         if (newPanes.length && targetKey === activeKey) {
             const { key } = newPanes[targetIndex === newPanes.length ? targetIndex - 1 : targetIndex];
             setActiveKey(key);
-            
+
         }
         setTabsItems(newPanes);
         props.removeTabByKey(targetKey)
-        
+
     };
 
     const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {
@@ -74,13 +70,15 @@ const MainTabContent = (props) => {
         }
     };
 
-    function getTabPaneByTabInfo(tabInfo: any): any{
-        return (
-            <Tabs.TabPane tab={tabInfo.tab} key={tabInfo.key}>
-                {getTabPaneComponentByKey(tabInfo.key)}                
-            </Tabs.TabPane>
-        );
-    }
+    const onDragEnd = ({ active, over }: DragEndEvent) => {
+        if (active.id !== over?.id) {
+            setTabsItems((prev) => {
+                const activeIndex = prev.findIndex((i) => i.key === active.id);
+                const overIndex = prev.findIndex((i) => i.key === over?.id);
+                return arrayMove(prev, activeIndex, overIndex);
+            });
+        }
+    };
 
     return (
         <>
@@ -90,11 +88,29 @@ const MainTabContent = (props) => {
                 //activeKey={props.focusTab}
                 hideAdd={true}
                 onEdit={onEdit}
-            >
-            {tabsItems.map((tabInfo, index) => {
-                return getTabPaneByTabInfo(tabInfo)
-            })}
-            </Tabs>
+                items={tabsItems.map(tabInfo => ({
+                    key: tabInfo.key,
+                    label: tabInfo.tab,
+                    children: getTabPaneComponentByKey(tabInfo.key)
+                }))}
+                renderTabBar={(tabBarProps: TabsProps, DefaultTabBar) => (
+
+                    <DndContext sensors={[sensor]} onDragEnd={onDragEnd} collisionDetection={closestCenter}>
+                        <SortableContext items={tabsItems.map((i) => i.key)} strategy={horizontalListSortingStrategy}>
+                            <DefaultTabBar rtl={false} mobile={false} {...tabBarProps}>
+                                {(node) => (
+                                    <DraggableTabNode
+                                        {...(node as React.ReactElement<DraggableTabPaneProps>).props}
+                                        key={node.key}
+                                    >
+                                        {node}
+                                    </DraggableTabNode>
+                                )}
+                            </DefaultTabBar>
+                        </SortableContext>
+                    </DndContext>
+                )}
+            />
         </>
     )
 }
